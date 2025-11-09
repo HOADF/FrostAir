@@ -1,169 +1,130 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FrostAir — демо: установка и продажа кондиционеров</title>
-
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FrostAir — Демо сайт установки кондиционеров</title>
+  <meta name="description" content="Демонстрационный сайт компании по установке и продаже кондиционеров. Современный дизайн и анимации.">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
   <!-- Header -->
-  <header id="main-header">
-    <div class="container header-content">
-      <div class="logo">
-        <div class="logo-text">Frost<span>Air</span></div>
-        <small class="demo-label">Demo Site</small>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <div class="logo-text">Frost<span>Air</span></div>
+          <div class="logo-sub">Demo Site</div>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#main" class="active">Главная</a></li>
+            <li><a href="#catalog">Каталог</a></li>
+            <li><a href="#services">Услуги</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+          </ul>
+        </nav>
+        <a href="#callback" class="btn">Обратный звонок</a>
       </div>
-      <nav>
-        <ul>
-          <li><a href="#main" class="active">Главная</a></li>
-          <li><a href="#catalog">Каталог</a></li>
-          <li><a href="#services">Услуги</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contacts">Контакты</a></li>
-        </ul>
-      </nav>
-      <a href="#callback" class="btn small-btn">Обратный звонок</a>
     </div>
   </header>
 
   <!-- Hero Slider -->
   <section class="hero" id="main">
-    <div class="hero-overlay">
-      <div class="hero-content">
-        <h1>FrostAir — комфорт и прохлада в каждом доме</h1>
-        <p>Демонстрационный сайт компании по установке и продаже кондиционеров.  
-        Современный дизайн, адаптивная структура и динамичный фон.</p>
-        <div class="hero-buttons">
-          <a href="#catalog" class="btn">Каталог</a>
-          <a href="#contacts" class="btn btn-outline">Контакты</a>
-        </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>FrostAir — комфорт и прохлада в каждом доме</h1>
+      <p>Демонстрационный сайт компании по установке и продаже кондиционеров.<br>Современный дизайн, анимации и адаптивная структура.</p>
+      <div class="hero-buttons">
+        <a href="#catalog" class="btn">Каталог</a>
+        <a href="#contacts" class="btn btn-outline">Контакты</a>
       </div>
     </div>
   </section>
 
-  <!-- Почему выбирают нас -->
+  <!-- Features -->
   <section class="features">
     <div class="container">
-      <div class="section-title">
-        <h2>Почему выбирают FrostAir</h2>
-        <p>Современные технологии, визуальная лёгкость и чистая структура.</p>
-      </div>
+      <h2>Почему выбирают FrostAir</h2>
       <div class="features-grid">
         <div class="feature-card">
-          <i class="fas fa-snowflake"></i>
+          <i class="fa-solid fa-snowflake"></i>
           <h3>Современный дизайн</h3>
-          <p>Актуальные тренды и минимализм без лишних деталей.</p>
+          <p>Адаптивный интерфейс и визуальные эффекты делают сайт удобным и лёгким.</p>
         </div>
         <div class="feature-card">
-          <i class="fas fa-bolt"></i>
+          <i class="fa-solid fa-bolt"></i>
           <h3>Быстрая загрузка</h3>
-          <p>Оптимизированная верстка без лишнего кода.</p>
+          <p>Оптимизированный код и изображения для высокой скорости загрузки.</p>
         </div>
         <div class="feature-card">
-          <i class="fas fa-code"></i>
+          <i class="fa-solid fa-code"></i>
           <h3>Чистый код</h3>
-          <p>Структура, готовая к доработке под любой проект.</p>
+          <p>Структурированный HTML, CSS и JS — легко редактировать под реальные проекты.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Каталог -->
+  <!-- Catalog -->
   <section class="catalog" id="catalog">
     <div class="container">
-      <div class="section-title">
-        <h2>Каталог кондиционеров (демо)</h2>
-        <p>Примеры популярных моделей. Цены и характеристики условные.</p>
-      </div>
-
+      <h2>Каталог кондиционеров (демо)</h2>
       <div class="products-grid">
         <div class="product-card">
-          <img src="https://images.unsplash.com/photo-1616627986445-037b4e6e3b11?auto=format&fit=crop&w=800&q=60" alt="LG DualCool" class="product-photo">
-          <div class="product-content">
-            <h3>LG DualCool P09EP</h3>
-            <ul>
-              <li>Площадь до 25 м²</li>
-              <li>Инверторный компрессор</li>
-              <li>Wi-Fi управление</li>
-            </ul>
-          </div>
+          <img src="https://images.unsplash.com/photo-1606813902798-04e7f92eb2e1?auto=format&fit=crop&w=600&q=80" alt="FrostWind 07X">
+          <h3>FrostWind 07X</h3>
+          <ul>
+            <li>Площадь: до 20 м²</li>
+            <li>Инверторный компрессор</li>
+            <li>Тихая работа</li>
+          </ul>
+          <a href="#" class="btn">Заказать</a>
         </div>
-
         <div class="product-card">
-          <img src="https://images.unsplash.com/photo-1603697097345-0a9e6b1b9d7e?auto=format&fit=crop&w=800&q=60" alt="Ballu EcoStar" class="product-photo">
-          <div class="product-content">
-            <h3>Ballu EcoStar BSVP-07HN1</h3>
-            <ul>
-              <li>Площадь до 20 м²</li>
-              <li>Энергоэффективность A++</li>
-              <li>Тихая работа</li>
-            </ul>
-          </div>
+          <img src="https://images.unsplash.com/photo-1598300054521-2c9a58c831cc?auto=format&fit=crop&w=600&q=80" alt="CoolPro 09I">
+          <h3>CoolPro 09I</h3>
+          <ul>
+            <li>Wi-Fi управление</li>
+            <li>Ночной режим</li>
+            <li>Гарантия 3 года</li>
+          </ul>
+          <a href="#" class="btn">Заказать</a>
         </div>
-
         <div class="product-card">
-          <img src="https://images.unsplash.com/photo-1607863683076-0e49b91eb2e9?auto=format&fit=crop&w=800&q=60" alt="Daikin FTXB20C" class="product-photo">
-          <div class="product-content">
-            <h3>Daikin FTXB20C</h3>
-            <ul>
-              <li>Класс энергоэффективности A+++</li>
-              <li>Тихая работа (19 дБ)</li>
-              <li>Система очистки воздуха</li>
-            </ul>
-          </div>
+          <img src="https://images.unsplash.com/photo-1613363421383-5a7b8b3e1166?auto=format&fit=crop&w=600&q=80" alt="Daikin Demo">
+          <h3>Daikin Demo</h3>
+          <ul>
+            <li>Проф. фильтр</li>
+            <li>Энергоэффективность A+++</li>
+            <li>Система очистки</li>
+          </ul>
+          <a href="#" class="btn">Заказать</a>
         </div>
-
         <div class="product-card">
-          <img src="https://images.unsplash.com/photo-1588854337236-6889d631faa8?auto=format&fit=crop&w=800&q=60" alt="Mitsubishi Heavy" class="product-photo">
-          <div class="product-content">
-            <h3>Mitsubishi Heavy SRK25</h3>
-            <ul>
-              <li>Автоматический перезапуск</li>
-              <li>Режим осушения</li>
-              <li>Площадь до 25 м²</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <img src="https://images.unsplash.com/photo-1616627986468-1f191b257a6f?auto=format&fit=crop&w=800&q=60" alt="Toshiba Mirai" class="product-photo">
-          <div class="product-content">
-            <h3>Toshiba Mirai RAS-10</h3>
-            <ul>
-              <li>Инвертор</li>
-              <li>Ночной режим</li>
-              <li>Площадь до 22 м²</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <img src="https://images.unsplash.com/photo-1621231823702-882f1b6d7ef3?auto=format&fit=crop&w=800&q=60" alt="Hisense Energy Pro" class="product-photo">
-          <div class="product-content">
-            <h3>Hisense Energy Pro AS-09</h3>
-            <ul>
-              <li>Сенсор температуры</li>
-              <li>Таймер и автоочистка</li>
-              <li>Инверторный двигатель</li>
-            </ul>
-          </div>
+          <img src="https://images.unsplash.com/photo-1585421514738-2a3f1f86d1a5?auto=format&fit=crop&w=600&q=80" alt="Toshiba Demo">
+          <h3>Toshiba Demo</h3>
+          <ul>
+            <li>Инвертор</li>
+            <li>Режим энергосбережения</li>
+            <li>Самоочистка</li>
+          </ul>
+          <a href="#" class="btn">Заказать</a>
         </div>
       </div>
-
-      <p class="demo-note-text">* Все данные приведены для демонстрации. Цены и характеристики условные.</p>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer>
+  <footer id="contacts">
     <div class="container">
-      <p>© 2025 FrostAir — демонстрационный сайт. Контент приведён в учебных целях.</p>
+      <p>© 2025 FrostAir Demo — демонстрационный сайт. Контакты и данные вымышлены.</p>
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
   <script src="script.js"></script>
 </body>
+</html>
