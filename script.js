@@ -1,42 +1,91 @@
 document.addEventListener("DOMContentLoaded", () => {
-  /* === Hero background slider === */
-  const hero = document.querySelector(".hero");
-  const slides = [
-    "https://images.unsplash.com/photo-1606813902798-04e7f92eb2e1?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1598300054521-2c9a58c831cc?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1613363421383-5a7b8b3e1166?auto=format&fit=crop&w=1600&q=80",
-  ];
-  let current = 0;
-  hero.style.backgroundImage = `url(${slides[current]})`;
-  setInterval(() => {
-    current = (current + 1) % slides.length;
-    hero.style.backgroundImage = `url(${slides[current]})`;
-  }, 6000);
+      /* === Hero background slider === */
+      const hero = document.querySelector(".hero");
+      const slides = [
+        "https://images.unsplash.com/photo-1600607687930-2a2f0ae63d78?auto=format&fit=crop&w=1600&q=80",
+        "https://images.unsplash.com/photo-1598300054521-2c9a58c831cc?auto=format&fit=crop&w=1600&q=80",
+        "https://images.unsplash.com/photo-1613363421383-5a7b8b3e1166?auto=format&fit=crop&w=1600&q=80",
+      ];
+      let current = 0;
+      hero.style.backgroundImage = `url(${slides[current]})`;
+      setInterval(() => {
+        current = (current + 1) % slides.length;
+        hero.style.backgroundImage = `url(${slides[current]})`;
+      }, 6000);
 
-  /* === Hide header on scroll down / show on scroll up === */
-  let lastScroll = window.scrollY;
-  const header = document.querySelector("header");
-  window.addEventListener("scroll", () => {
-    const sc = window.scrollY;
-    if (sc > lastScroll && sc > 120) header.classList.add("hide");
-    else header.classList.remove("hide");
-    lastScroll = sc;
-  });
-
-  /* === Active nav link on scroll === */
-  const sections = document.querySelectorAll("section[id]");
-  const links = document.querySelectorAll("nav a");
-
-  function activateLink() {
-    const pos = window.scrollY + 160;
-    sections.forEach(s => {
-      if (pos >= s.offsetTop && pos < s.offsetTop + s.offsetHeight) {
-        links.forEach(l => l.classList.remove("active"));
-        const active = document.querySelector(`nav a[href="#${s.id}"]`);
-        if (active) active.classList.add("active");
+      /* === Header Slider Functionality === */
+      function initHeaderSlider() {
+        const sliderTrack = document.querySelector('.slider-track');
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        if (!sliderTrack) return;
+        
+        // Clone slides for infinite effect
+        slides.forEach(slide => {
+          const clone = slide.cloneNode(true);
+          sliderTrack.appendChild(clone);
+        });
+        
+        // Restart animation when it ends
+        sliderTrack.addEventListener('animationiteration', () => {
+          // Smooth reset to initial position
+          setTimeout(() => {
+            sliderTrack.style.animation = 'none';
+            setTimeout(() => {
+              sliderTrack.style.animation = 'slideAnimation 30s infinite linear';
+            }, 50);
+          }, 0);
+        });
       }
+
+      // Initialize header slider
+      initHeaderSlider();
+
+      /* === Image Slider Functionality === */
+      const initImageSlider = () => {
+        const imageList = document.querySelector(".slider-wrapper .image-list");
+        const slideButtons = document.querySelectorAll(".slider-wrapper .slide-button");
+        
+        if (!imageList || slideButtons.length === 0) return;
+
+        // Прокрутка по клику на кнопки
+        slideButtons.forEach(button => {
+          button.addEventListener("click", () => {
+            const direction = button.id === "prev-slide" ? -1 : 1;
+            const scrollAmount = imageList.clientWidth * direction;
+            imageList.scrollBy({ left: scrollAmount, behavior: "smooth" });
+          });
+        });
+      }
+
+      // Инициализация слайдера после загрузки DOM
+      initImageSlider();
+
+      /* === Hide header on scroll down / show on scroll up === */
+      let lastScroll = window.scrollY;
+      const header = document.querySelector("header");
+      window.addEventListener("scroll", () => {
+        const sc = window.scrollY;
+        if (sc > lastScroll && sc > 120) header.classList.add("hide");
+        else header.classList.remove("hide");
+        lastScroll = sc;
+      });
+
+      /* === Active nav link on scroll === */
+      const sections = document.querySelectorAll("section[id]");
+      const links = document.querySelectorAll("nav a");
+
+      function activateLink() {
+        const pos = window.scrollY + 160;
+        sections.forEach(s => {
+          if (pos >= s.offsetTop && pos < s.offsetTop + s.offsetHeight) {
+            links.forEach(l => l.classList.remove("active"));
+            const active = document.querySelector(`nav a[href="#${s.id}"]`);
+            if (active) active.classList.add("active");
+          }
+        });
+      }
+      window.addEventListener("scroll", activateLink);
+      activateLink();
     });
-  }
-  window.addEventListener("scroll", activateLink);
-  activateLink();
-});
