@@ -80,6 +80,25 @@ nav a.active, nav a:hover{ background:rgba(14,165,255,0.08); color:var(--accent)
 /* footer */
 footer{ padding:26px 0; background:#fff; margin-top:30px; border-top:1px solid rgba(0,0,0,0.04); }
 
+.product-photo {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+.demo-note {
+  font-size: 13px;
+  color: #888;
+}
+
+.demo-note-text {
+  text-align: center;
+  margin-top: 30px;
+  color: #777;
+  font-size: 14px;
+}
+
 /* responsive */
 @media (max-width: 900px){
   .cards-grid{ grid-template-columns: 1fr; }
