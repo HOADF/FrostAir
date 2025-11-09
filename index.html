@@ -1,187 +1,102 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FrostAir — демо: установка и продажа кондиционеров</title>
-
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <div class="site-row">
-      <div class="brand">
-        <div class="logo">FrostAir</div>
-        <div class="small">Demo Site</div>
-      </div>
-
-      <nav>
-        <a href="#main" class="active">Главная</a>
-        <a href="#catalog">Каталог</a>
-        <a href="#services">Услуги</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contacts">Контакты</a>
-      </nav>
-
-      <div class="header-actions">
-        <button class="call-btn">Обратный звонок</button>
-      </div>
-    </div>
-  </header>
-
-  <!-- HERO: фон-слайдер -->
-  <section id="main" class="hero">
-    <div class="hero-slides">
-      <!-- Слайды: можно заменить URL на локальные файлы /images/slide1.jpg и т.д. -->
-      <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1581578017427-6d3c0f6d0a0b?q=80&w=1600&auto=format&fit=crop&sat=-30');"></div>
-      <div class="slide"       style="background-image: url('https://images.unsplash.com/photo-1605902711622-cfb43c44367e?q=80&w=1600&auto=format&fit=crop');"></div>
-      <div class="slide"       style="background-image: url('https://images.unsplash.com/photo-1581578017425-2b5b6c2f6b2a?q=80&w=1600&auto=format&fit=crop');"></div>
+<section class="catalog" id="catalog">
+  <div class="container">
+    <div class="section-title">
+      <h2>Каталог кондиционеров (демо)</h2>
+      <p>Примеры популярных моделей. Цены и характеристики указаны для демонстрации.</p>
     </div>
 
-    <div class="hero-content">
-      <h1>FrostAir — комфорт и прохлада в каждом доме</h1>
-      <p class="lead">Демонстрационный (demo) сайт для установки и продажи кондиционеров. Тестовая витрина — примеры товаров и адаптивный дизайн.</p>
-      <div class="hero-cta">
-        <a href="#catalog" class="btn">Каталог</a>
-        <a href="#contacts" class="btn btn-outline">Контакты</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY -->
-  <section class="why">
-    <div class="container">
-      <h2>Почему выбирают FrostAir</h2>
-      <p class="muted">Современные технологии, аккуратные мастера и удобная поддержка.</p>
-
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-icon">
-            <!-- SVG: snowflake -->
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M12 2v20M5 7l14 10M5 17l14-10" stroke="#0ea5ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>Профессиональный монтаж</h3>
-          <p>Аккуратно, по стандартам и с документами.</p>
-        </div>
-
-        <div class="card">
-          <div class="card-icon">
-            <!-- SVG: lightning -->
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" stroke="#0ea5ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>Гарантия и сервис</h3>
-          <p>Гарантия на работы и рекомендации по обслуживанию.</p>
-        </div>
-
-        <div class="card">
-          <div class="card-icon">
-            <!-- SVG: shield -->
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke="#0ea5ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>Чистый код в демо</h3>
-          <p>Простая структура — удобно изучать и модифицировать.</p>
+    <div class="products-grid">
+      <!-- LG -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1616627986445-037b4e6e3b11?auto=format&fit=crop&w=800&q=60" alt="LG DualCool" class="product-photo">
+        <div class="product-content">
+          <h3 class="product-title">LG DualCool P09EP</h3>
+          <div class="product-price">≈ 33 000 ₽ <span class="demo-note">(демо)</span></div>
+          <ul class="product-features">
+            <li>Площадь до 25 м²</li>
+            <li>Инверторный компрессор</li>
+            <li>Wi-Fi управление</li>
+          </ul>
+          <a href="#" class="btn">Заказать</a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- CATALOG -->
-  <section id="catalog" class="catalog">
-    <div class="container">
-      <h2>Каталог кондиционеров (demo)</h2>
-      <p class="muted">Примеры моделей. Это демо — цены скрыты.</p>
-
-      <div class="products-grid">
-        <!-- Product 1 -->
-        <article class="product">
-          <div class="product-top" style="background: linear-gradient(90deg,#08aaf5,#00d2ff);">
-            <svg viewBox="0 0 24 24" class="prod-svg" aria-hidden><path d="M3 7h18M6 11h12M9 15h6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="product-body">
-            <h3>FrostWind 07X</h3>
-            <ul>
-              <li>Площадь: до 20 м²</li>
-              <li>Инверторный компрессор</li>
-              <li>Тихая работа</li>
-            </ul>
-            <a class="btn small">Заказать</a>
-          </div>
-        </article>
-
-        <!-- Product 2 -->
-        <article class="product">
-          <div class="product-top" style="background: linear-gradient(90deg,#1191ff,#00d2ff);">
-            <svg viewBox="0 0 24 24" class="prod-svg" aria-hidden><path d="M12 3v18M3 12h18" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="product-body">
-            <h3>CoolPro 09I</h3>
-            <ul>
-              <li>Wi-Fi управление</li>
-              <li>Ночной режим</li>
-              <li>Гарантия 3 года</li>
-            </ul>
-            <a class="btn small">Заказать</a>
-          </div>
-        </article>
-
-        <!-- Product 3 -->
-        <article class="product">
-          <div class="product-top" style="background: linear-gradient(90deg,#22c1c3,#00d2ff);">
-            <svg viewBox="0 0 24 24" class="prod-svg" aria-hidden><path d="M3 7c3 3 6 3 9 0 3 3 6 3 9 0" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="product-body">
-            <h3>Daikin Demo</h3>
-            <ul>
-              <li>Проф. фильтр</li>
-              <li>Энергоэффективность</li>
-              <li>Опция очистки</li>
-            </ul>
-            <a class="btn small">Заказать</a>
-          </div>
-        </article>
-
-        <!-- Product 4 -->
-        <article class="product">
-          <div class="product-top" style="background: linear-gradient(90deg,#0ea5ff,#22c1c3);">
-            <svg viewBox="0 0 24 24" class="prod-svg" aria-hidden><path d="M4 7h16M4 12h16M4 17h16" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="product-body">
-            <h3>Toshiba Demo</h3>
-            <ul>
-              <li>Режимы работы</li>
-              <li>Инвертор</li>
-              <li>Ночная экономия</li>
-            </ul>
-            <a class="btn small">Заказать</a>
-          </div>
-        </article>
+      <!-- Ballu -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1603697097345-0a9e6b1b9d7e?auto=format&fit=crop&w=800&q=60" alt="Ballu EcoStar" class="product-photo">
+        <div class="product-content">
+          <h3 class="product-title">Ballu EcoStar BSVP-07HN1</h3>
+          <div class="product-price">≈ 25 000 ₽ <span class="demo-note">(демо)</span></div>
+          <ul class="product-features">
+            <li>Площадь до 20 м²</li>
+            <li>Энергоэффективность A++</li>
+            <li>Низкий уровень шума</li>
+          </ul>
+          <a href="#" class="btn">Заказать</a>
+        </div>
       </div>
-    </div>
-  </section>
 
-  <!-- CONTACTS (demo data) -->
-  <section id="contacts" class="contacts">
-    <div class="container">
-      <h2>Контакты — демо</h2>
-      <p class="muted">Это демонстрационная витрина. Контакты указаны для примера.</p>
+      <!-- Daikin -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1607863683076-0e49b91eb2e9?auto=format&fit=crop&w=800&q=60" alt="Daikin FTXB20C" class="product-photo">
+        <div class="product-content">
+          <h3 class="product-title">Daikin FTXB20C</h3>
+          <div class="product-price">≈ 56 000 ₽ <span class="demo-note">(демо)</span></div>
+          <ul class="product-features">
+            <li>Площадь до 20 м²</li>
+            <li>Класс энергоэффективности A+++</li>
+            <li>Тихая работа (19 дБ)</li>
+          </ul>
+          <a href="#" class="btn">Заказать</a>
+        </div>
+      </div>
 
-      <div class="contact-grid">
-        <div class="contact-card">
-          <p><strong>Телефон (демо):</strong> +7 (900) 000-00-00</p>
-          <p><strong>Email (демо):</strong> demo@frostair.example</p>
-          <p><strong>Адрес (демо):</strong> Москва, ул. Демонстрационная, 10</p>
+      <!-- Mitsubishi -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1588854337236-6889d631faa8?auto=format&fit=crop&w=800&q=60" alt="Mitsubishi Heavy SRK25" class="product-photo">
+        <div class="product-content">
+          <h3 class="product-title">Mitsubishi Heavy SRK25</h3>
+          <div class="product-price">≈ 48 000 ₽ <span class="demo-note">(демо)</span></div>
+          <ul class="product-features">
+            <li>Площадь до 25 м²</li>
+            <li>Автоматический перезапуск</li>
+            <li>Режим осушения</li>
+          </ul>
+          <a href="#" class="btn">Заказать</a>
+        </div>
+      </div>
+
+      <!-- Toshiba -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1616627986468-1f191b257a6f?auto=format&fit=crop&w=800&q=60" alt="Toshiba Mirai" class="product-photo">
+        <div class="product-content">
+          <h3 class="product-title">Toshiba Mirai RAS-10</h3>
+          <div class="product-price">≈ 42 000 ₽ <span class="demo-note">(демо)</span></div>
+          <ul class="product-features">
+            <li>Площадь до 22 м²</li>
+            <li>Инвертор</li>
+            <li>Ночной режим</li>
+          </ul>
+          <a href="#" class="btn">Заказать</a>
+        </div>
+      </div>
+
+      <!-- Hisense -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1621231823702-882f1b6d7ef3?auto=format&fit=crop&w=800&q=60" alt="Hisense Energy Pro" class="product-photo">
+        <div class="product-content">
+          <h3 class="product-title">Hisense Energy Pro AS-09</h3>
+          <div class="product-price">≈ 29 000 ₽ <span class="demo-note">(демо)</span></div>
+          <ul class="product-features">
+            <li>Инверторный двигатель</li>
+            <li>Сенсор температуры</li>
+            <li>Таймер и автоочистка</li>
+          </ul>
+          <a href="#" class="btn">Заказать</a>
         </div>
       </div>
     </div>
-  </section>
 
-  <footer>
-    <div class="container footer-row">
-      <div>© Demo — FrostAir. Это демонстрационная страница.</div>
-      <div class="muted">Используйте изображения из открытых источников (Unsplash) или замените на локальные.</div>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+    <p class="demo-note-text">* Все данные приведены для демонстрации. Цены и характеристики условные.</p>
+  </div>
+</section>
