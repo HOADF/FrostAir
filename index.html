@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FrostAir Demo | Установка и обслуживание кондиционеров</title>
-  <meta name="description" content="Демонстрационный сайт FrostAir. Установка, продажа и обслуживание кондиционеров. Современный дизайн и структура для портфолио.">
+  <title>FrostAir Demo | Установка кондиционеров</title>
+  <meta name="description" content="Демонстрационный сайт FrostAir: современный шаблон компании по установке кондиционеров. Анимации, адаптив и всплывающая форма.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <!-- Header -->
   <header>
     <div class="container">
@@ -27,18 +29,19 @@
             <li><a href="#contacts">Контакты</a></li>
           </ul>
         </nav>
+        <button id="openModal" class="btn btn-small">Обратный звонок</button>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="hero" id="main">
-    <div class="container">
-      <h1>Комфортный климат для вашего дома</h1>
-      <p>FrostAir — демонстрационный сайт по установке и продаже кондиционеров. Современный дизайн, адаптивная верстка, чистая структура.</p>
+    <div class="container" data-aos="fade-up">
+      <h1>FrostAir — комфорт и прохлада в каждом доме</h1>
+      <p>Демонстрационный сайт компании по установке и продаже кондиционеров. Современный дизайн, анимации и адаптивная структура.</p>
       <div class="hero-buttons">
         <a href="#catalog" class="btn">Каталог</a>
-        <a href="#contacts" class="btn btn-outline">Связаться</a>
+        <a href="#contacts" class="btn btn-outline">Контакты</a>
       </div>
     </div>
   </section>
@@ -46,25 +49,25 @@
   <!-- Features -->
   <section class="features">
     <div class="container">
-      <div class="section-title">
-        <h2>Преимущества FrostAir</h2>
-        <p>Демонстрация функционала, карточек и адаптивного макета.</p>
+      <div class="section-title" data-aos="fade-up">
+        <h2>Почему выбирают FrostAir</h2>
+        <p>Современные технологии, визуальная лёгкость и чистая структура.</p>
       </div>
       <div class="features-grid">
-        <div class="feature-card">
+        <div class="feature-card" data-aos="zoom-in">
           <i class="fas fa-snowflake feature-icon"></i>
           <h3>Современный дизайн</h3>
-          <p>Чистая структура и анимации для комфортного восприятия.</p>
+          <p>Мягкие цвета и чёткие формы делают сайт лёгким и приятным.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-aos="zoom-in" data-aos-delay="100">
           <i class="fas fa-bolt feature-icon"></i>
           <h3>Быстрая загрузка</h3>
-          <p>Оптимизированные изображения и стили.</p>
+          <p>Оптимизированные изображения и минималистичная верстка.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-aos="zoom-in" data-aos-delay="200">
           <i class="fas fa-laptop-code feature-icon"></i>
-          <h3>Семантический HTML</h3>
-          <p>Готовая структура под SEO и адаптивные сайты.</p>
+          <h3>Чистый код</h3>
+          <p>Идеально подходит для портфолио и демонстрации навыков.</p>
         </div>
       </div>
     </div>
@@ -73,32 +76,32 @@
   <!-- Catalog -->
   <section class="catalog" id="catalog">
     <div class="container">
-      <div class="section-title">
+      <div class="section-title" data-aos="fade-up">
         <h2>Каталог кондиционеров (демо)</h2>
-        <p>Пример карточек товаров с кнопками и описанием.</p>
+        <p>Пример карточек товаров с описанием и кнопками.</p>
       </div>
       <div class="products-grid">
-        <div class="product-card">
+        <div class="product-card" data-aos="fade-up">
           <div class="product-img"><i class="fas fa-snowflake"></i></div>
           <div class="product-content">
-            <h3>ArticCool 07X</h3>
-            <p class="product-price">26 990 ₽</p>
+            <h3>FrostWind 07X</h3>
+            <p class="product-price">25 990 ₽</p>
             <ul>
-              <li>Площадь: до 25 м²</li>
-              <li>Инвертор</li>
-              <li>Тихий режим</li>
+              <li>Площадь: до 20 м²</li>
+              <li>Инверторный компрессор</li>
+              <li>Тихая работа</li>
             </ul>
             <a href="#contacts" class="btn">Заказать</a>
           </div>
         </div>
-        <div class="product-card">
+        <div class="product-card" data-aos="fade-up" data-aos-delay="150">
           <div class="product-img"><i class="fas fa-wind"></i></div>
           <div class="product-content">
-            <h3>CoolWind PRO</h3>
+            <h3>CoolPro 09I</h3>
             <p class="product-price">33 500 ₽</p>
             <ul>
               <li>Wi-Fi управление</li>
-              <li>Сенсор температуры</li>
+              <li>Ночной режим</li>
               <li>Гарантия 3 года</li>
             </ul>
             <a href="#contacts" class="btn">Заказать</a>
@@ -108,42 +111,68 @@
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="faq" id="faq">
+  <!-- Services -->
+  <section class="services" id="services">
     <div class="container">
-      <div class="section-title">
-        <h2>Часто задаваемые вопросы</h2>
+      <div class="section-title" data-aos="fade-up">
+        <h2>Наши услуги (демо)</h2>
       </div>
-      <div class="accordion">
-        <div class="accordion-item">
-          <div class="accordion-header">Можно ли использовать сайт для своих проектов? <i class="fas fa-chevron-down"></i></div>
-          <div class="accordion-content"><p>Да, это демо-шаблон. Вы можете адаптировать его под свои нужды.</p></div>
+      <div class="features-grid">
+        <div class="feature-card" data-aos="fade-up">
+          <i class="fas fa-tools feature-icon"></i>
+          <h3>Монтаж кондиционеров</h3>
+          <p>Профессиональная установка (демо-описание).</p>
         </div>
-        <div class="accordion-item">
-          <div class="accordion-header">Можно ли изменить дизайн? <i class="fas fa-chevron-down"></i></div>
-          <div class="accordion-content"><p>Конечно. Все стили находятся в одном файле <code>style.css</code>.</p></div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <i class="fas fa-wrench feature-icon"></i>
+          <h3>Обслуживание</h3>
+          <p>Регулярная чистка и проверка системы (демо).</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+          <i class="fas fa-thermometer-half feature-icon"></i>
+          <h3>Заправка фреоном</h3>
+          <p>Контроль давления и герметичности (демо).</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section class="contact" id="contacts">
+  <!-- FAQ -->
+  <section class="faq" id="faq">
     <div class="container">
+      <div class="section-title" data-aos="fade-up">
+        <h2>FAQ</h2>
+      </div>
+      <div class="accordion">
+        <div class="accordion-item" data-aos="fade-up">
+          <div class="accordion-header">Что это за сайт? <i class="fas fa-chevron-down"></i></div>
+          <div class="accordion-content"><p>Это демонстрационный проект FrostAir. Используется для примеров и портфолио.</p></div>
+        </div>
+        <div class="accordion-item" data-aos="fade-up">
+          <div class="accordion-header">Можно ли использовать код? <i class="fas fa-chevron-down"></i></div>
+          <div class="accordion-content"><p>Да, сайт открыт для использования и доработки.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacts -->
+  <section class="contact" id="contacts">
+    <div class="container" data-aos="fade-up">
       <div class="section-title">
-        <h2>Контакты (демо)</h2>
-        <p>Эта страница создана для демонстрации. Данные вымышлены.</p>
+        <h2>Контакты</h2>
+        <p>Все данные вымышлены. Этот сайт — демонстрационный пример.</p>
       </div>
       <div class="contact-grid">
         <div class="contact-info">
-          <p><i class="fas fa-map-marker-alt"></i> г. Демоград, ул. Примерная, 12</p>
-          <p><i class="fas fa-phone"></i> <a href="tel:+70000000000">+7 (000) 000-00-00</a></p>
+          <p><i class="fas fa-map-marker-alt"></i> г. Демоград, ул. Образцовая, 10</p>
+          <p><i class="fas fa-phone"></i> +7 (000) 000-00-00</p>
           <p><i class="fas fa-envelope"></i> demo@frostair.ru</p>
         </div>
         <div class="contact-form">
           <form>
-            <input type="text" placeholder="Ваше имя" required>
-            <input type="email" placeholder="Ваш e-mail" required>
+            <input type="text" placeholder="Имя" required>
+            <input type="email" placeholder="E-mail" required>
             <textarea placeholder="Сообщение" required></textarea>
             <button class="btn">Отправить</button>
           </form>
@@ -154,19 +183,50 @@
 
   <!-- Footer -->
   <footer>
-    <div class="container">
-      <p>© 2025 FrostAir Demo | Создано для портфолио. Все данные вымышлены.</p>
-    </div>
+    <p>© 2025 FrostAir Demo | Демонстрационный шаблон для GitHub Pages</p>
   </footer>
 
+  <!-- Popup -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Заказать обратный звонок (демо)</h3>
+      <form>
+        <input type="text" placeholder="Ваше имя" required>
+        <input type="tel" placeholder="Ваш телефон" required>
+        <button class="btn">Отправить</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    // Аккордеон FAQ
+    AOS.init({ once: true });
+
+    // Аккордеон
     document.querySelectorAll('.accordion-header').forEach(header => {
       header.addEventListener('click', () => {
         const content = header.nextElementSibling;
         content.classList.toggle('active');
-        const icon = header.querySelector('i');
-        icon.classList.toggle('fa-chevron-up');
+        header.querySelector('i').classList.toggle('fa-chevron-up');
+      });
+    });
+
+    // Модальное окно
+    const modal = document.getElementById('modal');
+    const openModal = document.getElementById('openModal');
+    const closeModal = document.querySelector('.close');
+
+    openModal.onclick = () => modal.classList.add('show');
+    closeModal.onclick = () => modal.classList.remove('show');
+    window.onclick = e => { if (e.target === modal) modal.classList.remove('show'); };
+
+    // Плавная прокрутка
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(anchor.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
       });
     });
   </script>
