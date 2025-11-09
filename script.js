@@ -1,53 +1,39 @@
 document.addEventListener("DOMContentLoaded", () => {
-  /* === 1. Фон-слайдер === */
+  // 1) Slider
   const slides = document.querySelectorAll(".slide");
   let current = 0;
-
-  function showSlide(index) {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle("active", i === index);
-    });
+  if (slides.length) {
+    slides.forEach((s,i)=> s.classList.toggle('active', i===0));
+    setInterval(() => {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 6000);
   }
 
-  function nextSlide() {
-    current = (current + 1) % slides.length;
-    showSlide(current);
-  }
-
-  showSlide(current);
-  setInterval(nextSlide, 6000); // смена каждые 6 секунд
-
-  /* === 2. Скрытие меню при скролле вниз === */
-  let lastScroll = 0;
+  // 2) Hide header on scroll down / show on scroll up
+  let lastScroll = window.scrollY || 0;
   const header = document.querySelector("header");
-
   window.addEventListener("scroll", () => {
-    const currentScroll = window.pageYOffset;
-    if (currentScroll > lastScroll && currentScroll > 100) {
-      header.classList.add("hide");
-    } else {
-      header.classList.remove("hide");
-    }
-    lastScroll = currentScroll;
+    const sc = window.scrollY || 0;
+    if (sc > lastScroll && sc > 120) header.classList.add('hide');
+    else header.classList.remove('hide');
+    lastScroll = sc;
   });
 
-  /* === 3. Подсветка активного раздела === */
+  // 3) Active nav link on scroll
   const sections = document.querySelectorAll("section[id]");
-  const navLinks = document.querySelectorAll("nav a");
-
-  function activateLink() {
-    let scrollPos = window.scrollY + 150;
-    sections.forEach((section) => {
-      if (
-        scrollPos > section.offsetTop &&
-        scrollPos < section.offsetTop + section.offsetHeight
-      ) {
-        navLinks.forEach((link) => link.classList.remove("active"));
-        const activeLink = document.querySelector(`nav a[href="#${section.id}"]`);
-        if (activeLink) activeLink.classList.add("active");
+  const links = document.querySelectorAll("nav a");
+  function activateLink(){
+    const pos = window.scrollY + 160;
+    sections.forEach(s => {
+      if (pos >= s.offsetTop && pos < s.offsetTop + s.offsetHeight) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`nav a[href="#${s.id}"]`);
+        if (a) a.classList.add('active');
       }
     });
   }
-
-  window.addEventListener("scroll", activateLink);
+  window.addEventListener('scroll', activateLink);
+  activateLink(); // initial
 });
