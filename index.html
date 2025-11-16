@@ -1,161 +1,105 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FrostAir — Демо сайт установки кондиционеров</title>
-  <meta name="description" content="Демонстрационный сайт компании по установке и продаже кондиционеров. Современный дизайн и анимации.">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FrostAir — климатические системы</title>
+  <meta name="description" content="Каталог кондиционеров — тёплая и холодная тема, визуализация потока воздуха, иней/дымка." />
+  <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+<body class="theme-cold">
 
-<body>
+  <!-- THEME SWITCHER (center top) -->
+  <div class="theme-switcher" id="themeSwitcher" title="Переключить тему">
+    <button id="themeToggle" aria-label="Переключить тёплую/холодную тему">
+      <span class="icon-snow">❄</span>
+      <span class="icon-sun">☀</span>
+    </button>
+  </div>
+
+  <!-- SIDE AIR (left/right) — видно только в боковых зонах -->
+  <div class="side-air left" aria-hidden="true"></div>
+  <div class="side-air right" aria-hidden="true"></div>
+
   <!-- Header -->
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <div class="logo">
-          <div class="logo-text">Frost<span>Air</span></div>
-          <div class="logo-sub">Demo Site</div>
-        </div>
-        <nav>
-          <ul>
-            <li><a href="#main" class="active">Главная</a></li>
-            <li><a href="#catalog">Каталог</a></li>
-            <li><a href="#services">Услуги</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contacts">Контакты</a></li>
-          </ul>
-        </nav>
-        <a href="#callback" class="btn">Обратный звонок</a>
-      </div>
-    </div>
-    
-    <!-- Header Slider -->
-    <div class="header-slider">
-      <div class="slider-track">
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1600607687930-2a2f0ae63d78?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')"></div>
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1598300054521-2c9a58c831cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')"></div>
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1613363421383-5a7b8b3e1166?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')"></div>
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1585412727339-54e4bae11b6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')"></div>
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1531842477197-8ac6d45f5eb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')"></div>
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1633269545093-4d0d0fa9d6be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')"></div>
-      </div>
-      <div class="slider-overlay"></div>
+  <header class="site-header">
+    <div class="wrap">
+      <div class="logo">FrostAir<span class="dot">.</span></div>
+      <nav>
+        <a href="#hero">Главная</a>
+        <a href="#catalog">Каталог</a>
+        <a href="#about">О нас</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <a href="#contacts" class="cta">Заказать</a>
     </div>
   </header>
 
-  <!-- Hero Slider -->
-  <section class="hero" id="main">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1>FrostAir — комфорт и прохлада в каждом доме</h1>
-      <p>Демонстрационный сайт компании по установке и продаже кондиционеров.<br>Современный дизайн, анимации и адаптивная структура.</p>
-      <div class="hero-buttons">
-        <a href="#catalog" class="btn">Каталог</a>
-        <a href="#contacts" class="btn btn-outline">Контакты</a>
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <h1>Комфортный климат<br><span class="accent">за 1 день</span></h1>
+        <p class="lead">Выбирай режим: охлаждение или обогрев. Видно поток воздуха по краям — не мешает тексту.</p>
+        <div class="hero-actions">
+          <a href="#catalog" class="btn">Посмотреть каталог</a>
+          <a href="#contacts" class="btn btn-outline">Связаться</a>
+        </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Features -->
-  <section class="features">
-    <div class="container">
-      <h2>Почему выбирают FrostAir</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <i class="fa-solid fa-snowflake"></i>
-          <h3>Современный дизайн</h3>
-          <p>Адаптивный интерфейс и визуальные эффекты делают сайт удобным и лёгким.</p>
-        </div>
-        <div class="feature-card">
-          <i class="fa-solid fa-bolt"></i>
-          <h3>Быстрая загрузка</h3>
-          <p>Оптимизированный код и изображения для высокой скорости загрузки.</p>
-        </div>
-        <div class="feature-card">
-          <i class="fa-solid fa-code"></i>
-          <h3>Чистый код</h3>
-          <p>Структурированный HTML, CSS и JS — легко редактировать под реальные проекты.</p>
+      <div class="hero-right">
+        <!-- крупная демонстрация кондиционера -->
+        <div class="product-show">
+          <img id="heroProductImage" src="https://images.unsplash.com/photo-1585738384067-829bf02509e8?auto=format&fit=crop&w=900&q=80" alt="Кондиционер" />
+          <div class="product-tag">Рекомендуем</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Image Slider Section -->
-  <section class="slider-section">
-    <div class="container">
-      <h2>Наши работы и продукция</h2>
-      <div class="slider-wrapper">
-        <button id="prev-slide" class="slide-button material-symbols-rounded">‹</button>
-        <div class="image-list">
-          <img src="https://images.unsplash.com/photo-1531842477197-8ac6d45f5eb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Установленный кондиционер в гостиной" class="image-item" />
-          <img src="https://images.unsplash.com/photo-1633269545093-4d0d0fa9d6be?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Процесс монтажа кондиционера" class="image-item" />
-          <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Внутренний блок в интерьере" class="image-item" />
-          <img src="https://images.unsplash.com/photo-1623766238166-1d4d90997c71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Наружный блок на стене" class="image-item" />
-          <img src="https://images.unsplash.com/photo-1613390419819-8b9a5378a61a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Кондиционер в спальне" class="image-item" />
-          <img src="https://images.unsplash.com/photo-1585738384067-829bf02509e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Кондиционер в офисе" class="image-item" />
-        </div>
-        <button id="next-slide" class="slide-button material-symbols-rounded">›</button>
+  <!-- FEATURES -->
+  <section id="about" class="features">
+    <div class="wrap">
+      <h2>Почему выбирают нас</h2>
+      <div class="cards">
+        <div class="card"><i class="fa-solid fa-snowflake"></i><h3>Эффективность</h3><p>Инверторные технологии для экономии энергии.</p></div>
+        <div class="card"><i class="fa-solid fa-wind"></i><h3>Тихая работа</h3><p>Уровень шума от 19 дБ — почти не слышно.</p></div>
+        <div class="card"><i class="fa-solid fa-tools"></i><h3>Установка</h3><p>Профессиональный монтаж и сервис.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- Catalog -->
-  <section class="catalog" id="catalog">
-    <div class="container">
-      <h2>Каталог кондиционеров (демо)</h2>
-      <div class="products-grid">
-        <div class="product-card">
-          <img src="https://images.unsplash.com/photo-1600607687930-2a2f0ae63d78?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="FrostWind 07X">
-          <h3>FrostWind 07X</h3>
-          <ul>
-            <li>Площадь: до 20 м²</li>
-            <li>Инверторный компрессор</li>
-            <li>Тихая работа</li>
-          </ul>
-          <a href="#" class="btn">Заказать</a>
-        </div>
-        <div class="product-card">
-          <img src="https://images.unsplash.com/photo-1598300054521-2c9a58c831cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="CoolPro 09I">
-          <h3>CoolPro 09I</h3>
-          <ul>
-            <li>Wi-Fi управление</li>
-            <li>Ночной режим</li>
-            <li>Гарантия 3 года</li>
-          </ul>
-          <a href="#" class="btn">Заказать</a>
-        </div>
-        <div class="product-card">
-          <img src="https://images.unsplash.com/photo-1613363421383-5a7b8b3e1166?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Daikin Demo">
-          <h3>Daikin Demo</h3>
-          <ul>
-            <li>Проф. фильтр</li>
-            <li>Энергоэффективность A+++</li>
-            <li>Система очистки</li>
-          </ul>
-          <a href="#" class="btn">Заказать</a>
-        </div>
-        <div class="product-card">
-          <img src="https://images.unsplash.com/photo-1585412727339-54e4bae11b6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Toshiba Demo">
-          <h3>Toshiba Demo</h3>
-          <ul>
-            <li>Инвертор</li>
-            <li>Режим энергосбережения</li>
-            <li>Самоочистка</li>
-          </ul>
-          <a href="#" class="btn">Заказать</a>
-        </div>
+  <!-- CATALOG -->
+  <section id="catalog" class="catalog">
+    <div class="wrap">
+      <h2>Каталог кондиционеров</h2>
+      <p class="catalog-sub">Примеры моделей — реальные названия. Фото — репрезентации для демонстрации.</p>
+
+      <div id="productsGrid" class="products-grid">
+        <!-- карточки будут сгенерированы JS -->
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer id="contacts">
-    <div class="container">
-      <p>© 2025 FrostAir Demo — демонстрационный сайт. Контакты и данные вымышлены.</p>
+  <!-- FROST / WARM LAYER (внизу) -->
+  <div id="bottomLayer" class="bottom-layer" aria-hidden="true">
+    <div class="frost"></div>
+  </div>
+
+  <!-- CONTACTS / FOOTER -->
+  <footer id="contacts" class="footer">
+    <div class="wrap">
+      <div class="footer-left">
+        <h3>FrostAir</h3>
+        <p>Демо-сайт — контакты вымышлены.</p>
+      </div>
+      <div class="footer-right">
+        <p>© <span id="year"></span> FrostAir Demo</p>
+      </div>
     </div>
   </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
