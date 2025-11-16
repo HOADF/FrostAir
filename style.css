@@ -1,278 +1,162 @@
- /* Общие стили */
-    * {margin: 0; padding: 0; box-sizing: border-box;}
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background: #f6faff;
-      color: #222;
-      scroll-behavior: smooth;
-    }
+:root{
+  --bg:#f3f9ff;
+  --text:#122;
+  --accent:#00aaff;
+  --card:#ffffff;
+  --cold-air: rgba(0,170,255,0.14);
+  --warm-air: rgba(255,140,40,0.12);
+  --glass: rgba(255,255,255,0.6);
+}
 
-    /* Header */
-    header {
-      background: transparent;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 100;
-      transition: transform 0.4s ease;
-      overflow: hidden;
-    }
-    header.hide { transform: translateY(-100%); }
+/* COMMON RESET */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
 
-    .container {width: 90%; max-width: 1200px; margin: 0 auto;}
+/* wrapper */
+.wrap{width:90%;max-width:1200px;margin:0 auto}
 
-    .header-content {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 15px 0;
-      position: relative;
-      z-index: 2;
-    }
+/* HEADER */
+.site-header{
+  position:fixed;left:0;right:0;top:0;z-index:40;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0));
+  backdrop-filter: blur(6px);
+  border-bottom:1px solid rgba(0,0,0,0.05);
+}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.logo{font-weight:700;font-size:1.25rem}
+nav a{margin:0 10px;color:inherit;text-decoration:none;font-weight:600}
+.cta{background:var(--accent);color:#fff;padding:8px 14px;border-radius:20px;text-decoration:none}
 
-    .logo-text {font-size: 1.6rem; font-weight: bold; color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);}
-    .logo-text span {color: #00ccff;}
-    .logo-sub {font-size: 0.8rem; color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);}
+/* THEME SWITCHER (center top) */
+.theme-switcher{
+  position:fixed;left:50%;transform:translateX(-50%);top:76px;z-index:60;
+  display:flex;align-items:center;justify-content:center;
+}
+.theme-switcher button{
+  width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:20px;
+  box-shadow:0 6px 18px rgba(2,12,30,0.12);background:linear-gradient(180deg,rgba(255,255,255,0.9),#fff);
+  transition:transform .25s, background .4s;
+}
+.theme-switcher button:active{transform:scale(.97)}
+.theme-switcher .icon-snow{display:inline-block}
+.theme-switcher .icon-sun{display:inline-block;margin-left:6px}
 
-    nav ul {list-style: none; display: flex; gap: 1.5rem;}
-    nav a {
-      text-decoration: none; color: #fff; font-weight: 500;
-      padding: 6px 10px; border-radius: 6px; transition: 0.3s;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    }
-    nav a.active, nav a:hover {background: #0099ff; color: #fff;}
+/* SIDE AIR - left/right zones (only at sides, not over content) */
+.side-air{
+  position:fixed;top:0;height:100%;width:18vw;max-width:220px;z-index:10;pointer-events:none;
+  mix-blend-mode:screen;
+}
+.side-air.left{left:0;display:block}
+.side-air.right{right:0;transform:scaleX(-1);display:block}
 
-    .btn {
-      background: #0099ff;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-    }
-    .btn:hover {background: #007acc;}
-    .btn-outline {
-      background: transparent;
-      border: 2px solid #fff;
-      color: #fff;
-    }
-    .btn-outline:hover {background: #fff; color: #0099ff;}
+/* draw animated flowing gradients with multiple layers */
+.side-air::before,
+.side-air::after{
+  content:"";position:absolute;inset:0;border-radius:0;
+  background:linear-gradient(180deg,transparent,transparent);
+  opacity:0.95;
+  filter:blur(20px) saturate(120%);
+}
+.side-air::before{
+  background: radial-gradient(closest-side, var(--air-color), transparent 60%);
+  animation: drift 8s linear infinite;
+  opacity:.85;
+}
+.side-air::after{
+  background: linear-gradient(180deg, transparent 10%, var(--air-color) 45%, transparent 80%);
+  animation: wave 6s ease-in-out infinite;
+  opacity:.6;
+  transform: translateY(10%);
+}
 
-    /* Header Slider Styles */
-    .header-slider {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-    }
+/* HERO */
+.hero{padding-top:120px;padding-bottom:90px}
+.hero-inner{display:flex;gap:30px;align-items:center}
+.hero-left{flex:1}
+.hero-right{flex:1;display:flex;align-items:center;justify-content:center}
+.hero h1{font-size:2.2rem;line-height:1.05}
+.hero .lead{margin-top:8px;color:rgba(0,0,0,0.6)}
+.hero-actions{margin-top:18px;display:flex;gap:12px}
+.btn{background:var(--accent);color:#fff;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700}
+.btn-outline{background:transparent;border:2px solid var(--accent);color:var(--accent)}
 
-    .slider-track {
-      display: flex;
-      width: 600%; /* 6 slides × 100% */
-      height: 100%;
-      animation: slideAnimation 30s infinite linear;
-    }
+/* product-show */
+.product-show{width:320px;height:220px;border-radius:16px;overflow:hidden;position:relative;background:var(--card);box-shadow:0 10px 30px rgba(2,12,30,0.08)}
+.product-show img{width:100%;height:100%;object-fit:cover;display:block}
+.product-tag{position:absolute;left:12px;top:12px;background:rgba(0,0,0,0.55);color:#fff;padding:6px 10px;border-radius:10px;font-weight:700}
 
-    .slide {
-      width: 16.666%; /* 100% / 6 slides */
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
+/* FEATURES */
+.features{padding:48px 0}
+.features h2{text-align:center;margin-bottom:20px}
+.cards{display:flex;gap:16px;justify-content:center;margin-top:12px}
+.card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 20px rgba(2,12,30,0.06);width:240px;text-align:center}
+.card i{font-size:22px;color:var(--accent);margin-bottom:10px}
 
-    .slider-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(0,153,255,0.4) 0%, rgba(0,0,0,0.3) 100%);
-    }
+/* CATALOG */
+.catalog{padding:60px 0}
+.catalog h2{text-align:center;margin-bottom:6px}
+.catalog-sub{text-align:center;color:rgba(0,0,0,0.55);margin-bottom:20px}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
 
-    /* Slider animation */
-    @keyframes slideAnimation {
-      0% { transform: translateX(0); }
-      16.666% { transform: translateX(0); }
-      33.333% { transform: translateX(-16.666%); }
-      50% { transform: translateX(-33.333%); }
-      66.666% { transform: translateX(-50%); }
-      83.333% { transform: translateX(-66.666%); }
-      100% { transform: translateX(-66.666%); }
-    }
+/* product card */
+.product{
+  background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(2,12,30,0.06);
+  display:flex;flex-direction:column;transition:transform .25s;
+}
+.product:hover{transform:translateY(-6px)}
+.product img{height:160px;width:100%;object-fit:cover}
+.product .info{padding:12px;flex:1;display:flex;flex-direction:column;gap:8px}
+.product .info h3{font-size:1.05rem}
+.price{font-weight:800;color:var(--accent)}
+.product .actions{display:flex;gap:8px;padding:12px;border-top:1px solid rgba(0,0,0,0.04)}
 
-    /* Pause animation on hover */
-    .header-slider:hover .slider-track {
-      animation-play-state: paused;
-    }
+/* BOTTOM LAYER — frost / warm smoke */
+.bottom-layer{
+  position:fixed;left:0;right:0;bottom:0;height:26vh;max-height:260px;z-index:30;
+  pointer-events:none;display:flex;align-items:flex-end;justify-content:center;
+  transition:height .5s;
+}
+.frost{
+  width:100%;height:100%;background:linear-gradient(180deg, rgba(255,255,255,0.0), rgba(255,255,255,0.85));
+  backdrop-filter: blur(6px) saturate(140%);mask-image:linear-gradient(#000 45%, transparent 100%);
+  transition:mask-position .45s, opacity .35s;
+  position:relative;
+  box-shadow: inset 0 8px 40px rgba(255,255,255,0.15);
+}
 
-    /* Hero */
-    .hero {
-      position: relative;
-      height: 90vh;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background-size: cover;
-      background-position: center;
-      margin-top: 80px;
-    }
-    .hero-overlay {
-      position: absolute; inset: 0; background: rgba(0,0,0,0.45);
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      padding: 0 20px;
-    }
-    .hero h1 {font-size: 2.2rem; margin-bottom: 15px;}
-    .hero p {font-size: 1.1rem; line-height: 1.5;}
-    .hero-buttons {margin-top: 25px; display: flex; gap: 15px; justify-content: center;}
+/* reveal effect — text below will appear as user scrolls up */
+.reveal-from-frost{transform:translateY(40px);opacity:0;transition:transform .6s ease, opacity .6s ease}
 
-    /* Features */
-    .features {padding: 80px 0; text-align: center;}
-    .features h2 {margin-bottom: 40px;}
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-    }
-    .feature-card {
-      background: #fff;
-      border-radius: 10px;
-      padding: 30px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
-    }
-    .feature-card:hover {transform: translateY(-6px);}
-    .feature-card i {font-size: 2rem; color: #0099ff; margin-bottom: 15px;}
+/* FOOTER */
+.footer{padding:28px 0;background:linear-gradient(180deg,#0b1b26,#122632);color:#d9ecff;margin-top:40px}
+.footer .wrap{display:flex;justify-content:space-between;align-items:center}
 
-    /* Catalog */
-    .catalog {padding: 80px 0;}
-    .catalog h2 {text-align: center; margin-bottom: 40px;}
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-    }
-    .product-card {
-      background: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
-    }
-    .product-card:hover {transform: translateY(-5px);}
-    .product-card img {width: 100%; height: 180px; object-fit: cover;}
-    .product-card h3 {margin: 15px 20px 10px;}
-    .product-card ul {margin: 0 20px 15px; list-style: none;}
-    .product-card li {margin-bottom: 5px;}
-    .product-card .btn {display: block; text-align: center; margin: 0 20px 20px;}
+/* ANIMATIONS */
+@keyframes drift{0%{transform:translateY(-8%) translateX(0)}50%{transform:translateY(8%) translateX(6%)}100%{transform:translateY(-8%) translateX(0)}}
+@keyframes wave{0%{transform:translateY(0) scaleY(1)}50%{transform:translateY(6%) scaleY(1.05)}100%{transform:translateY(0) scaleY(1)}}
 
-    /* Image Slider Section */
-    .slider-section {
-      padding: 80px 0;
-      background: #f6faff;
-    }
-    .slider-section h2 {
-      text-align: center;
-      margin-bottom: 40px;
-    }
+/* THEMES */
+body.theme-cold{
+  --bg:#eef8ff;--text:#082231;--accent:#0099ff;--card:#ffffff;--air-color: rgba(0,153,255,0.16);--glass:rgba(255,255,255,0.75)
+}
+body.theme-warm{
+  --bg:linear-gradient(180deg,#fff6ee,#ffe9d6);--text:#2a1607;--accent:#ff8800;--card:#fff8f2;--air-color: rgba(255,130,30,0.16);--glass:rgba(255,250,240,0.8)
+  background: linear-gradient(180deg,#fff6ee,#ffe9d6);
+}
 
-    /* Контейнер слайдера */
-    .slider-wrapper {
-      position: relative;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    /* Кнопки навигации */
-    .slider-wrapper .slide-button {
-      position: absolute;
-      top: 50%;
-      outline: none;
-      border: none;
-      height: 50px;
-      width: 50px;
-      z-index: 5;
-      color: #fff;
-      display: flex;
-      cursor: pointer;
-      font-size: 2.2rem;
-      background: #0099ff;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      transform: translateY(-50%);
-      transition: background 0.3s;
-    }
-    .slider-wrapper .slide-button:hover {
-      background: #007acc;
-    }
-    .slider-wrapper .slide-button#prev-slide {
-      left: -25px;
-    }
-    .slider-wrapper .slide-button#next-slide {
-      right: -25px;
-    }
-
-    /* Список изображений */
-    .slider-wrapper .image-list {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 18px;
-      font-size: 0;
-      overflow-x: auto;
-      scrollbar-width: none;
-      scroll-behavior: smooth;
-    }
-    .slider-wrapper .image-list::-webkit-scrollbar {
-      display: none;
-    }
-    .slider-wrapper .image-list .image-item {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    /* Footer */
-    footer {
-      background: #1b2b3a;
-      color: #ccc;
-      padding: 30px 0;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 1023px) {
-      .slider-wrapper .slide-button {
-        display: none !important;
-      }
-      .slider-wrapper .image-list {
-        gap: 10px;
-        grid-template-columns: repeat(4, 1fr);
-      }
-      .slider-wrapper .image-list .image-item {
-        height: 250px;
-      }
-    }
-    
-    @media (max-width: 768px){
-      .header-content {flex-direction: column; gap: 10px;}
-      .hero h1 {font-size: 1.8rem;}
-      .hero p {font-size: 1rem;}
-      .features, .catalog {padding: 50px 0;}
-      .slider-wrapper .image-list {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
+/* small screens */
+@media (max-width:900px){
+  .hero-inner{flex-direction:column}
+  .theme-switcher{top:92px}
+  .side-air{display:none}
+  .bottom-layer{height:32vh}
+}
