@@ -37,26 +37,34 @@
   </header>
 
   <!-- HERO -->
-  <section id="hero" class="hero">
-    <div class="hero-inner">
-      <div class="hero-left">
-        <h1>Комфортный климат<br><span class="accent">за 1 день</span></h1>
-        <p class="lead">Выбирай режим: охлаждение или обогрев. Видно поток воздуха по краям — не мешает тексту.</p>
-        <div class="hero-actions">
-          <a href="#catalog" class="btn">Посмотреть каталог</a>
-          <a href="#contacts" class="btn btn-outline">Связаться</a>
-        </div>
+<section id="hero" class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <h1>Комфорт в одно <br><span class="accent">касание</span></h1>
+      <p class="lead">Интеллектуальное управление климатом. Почувствуйте разницу прямо сейчас, переключив режим на кондиционере.</p>
+      <div class="hero-actions">
+        <a href="#catalog" class="btn">Каталог моделей</a>
       </div>
+    </div>
 
-      <div class="hero-right">
-        <!-- крупная демонстрация кондиционера -->
-        <div class="product-show">
-          <img id="heroProductImage" src="https://images.unsplash.com/photo-1585738384067-829bf02509e8?auto=format&fit=crop&w=900&q=80" alt="Кондиционер" />
-          <div class="product-tag">Рекомендуем</div>
+    <div class="ac-unit-container">
+      <div class="ac-unit">
+        <div class="ac-body">
+          <div class="ac-display">
+            <span id="temp-display">21°C</span>
+          </div>
+          <div class="ac-vent"></div>
+          <button id="themeToggle" class="ac-power-btn" aria-label="Смена режима">
+            <i class="fa-solid fa-power-off"></i>
+          </button>
+        </div>
+        <div class="air-flow-down">
+          <span></span><span></span><span></span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- FEATURES -->
   <section id="about" class="features">
