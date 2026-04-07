@@ -1,154 +1,115 @@
-/* 1. ПЕРЕМЕННЫЕ И ТЕМЫ */
 :root {
-  --bg: #f3f9ff;
-  --text: #122;
-  --accent: #0099ff;
-  --card: #ffffff;
   --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   --cold-accent: #00d4ff;
   --warm-accent: #ff8c00;
-  --air-color: rgba(0, 153, 255, 0.16);
+  --cold-bg: #f0faff;
+  --warm-bg: #fff8f0;
 }
 
-body.theme-cold {
-  --bg: #eef8ff;
-  --text: #082231;
-  --accent: var(--cold-accent);
-  --card: #ffffff;
-  --air-color: rgba(0, 212, 255, 0.2);
-}
-
-body.theme-warm {
-  --bg: linear-gradient(180deg, #fff6ee, #ffe9d6);
-  --text: #2a1607;
-  --accent: var(--warm-accent);
-  --card: #fff8f2;
-  --air-color: rgba(255, 140, 0, 0.15);
-}
-
-/* 2. СБРОС И БАЗА */
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; scroll-behavior: smooth; }
 body {
-  font-family: Inter, "Segoe UI", Roboto, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  transition: background 0.6s ease;
+  font-family: 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
+  transition: background 0.8s ease;
+  color: #222;
 }
+
+body.theme-cold { background-color: var(--cold-bg); --accent: var(--cold-accent); }
+body.theme-warm { background-color: var(--warm-bg); --accent: var(--warm-accent); }
+
 .wrap { width: 90%; max-width: 1200px; margin: 0 auto; }
 
-/* 3. ШАПКА */
-.site-header {
-  position: fixed; left: 0; right: 0; top: 0; z-index: 100;
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-.site-header .wrap { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; }
-.logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
-.logo .dot { color: var(--accent); }
-nav a { margin: 0 15px; color: inherit; text-decoration: none; font-weight: 600; opacity: 0.8; transition: 0.3s; }
-nav a:hover { opacity: 1; color: var(--accent); }
-.cta { background: var(--accent); color: #fff; padding: 10px 20px; border-radius: 30px; text-decoration: none; font-weight: 700; transition: 0.3s; }
-
-/* 4. ВИЗУАЛЬНЫЕ ЭФФЕКТЫ (БОКА И НИЗ) */
+/* БОКОВЫЕ ЭФФЕКТЫ */
 .side-air {
-  position: fixed; top: 0; bottom: 0; width: 15vw; z-index: 5;
-  pointer-events: none; transition: var(--transition);
+  position: fixed; top: 0; bottom: 0; width: 20vw; z-index: 1;
+  pointer-events: none; opacity: 0; transition: opacity 1s, background 1s;
 }
-.side-air.left { left: 0; }
-.side-air.right { right: 0; transform: scaleX(-1); }
+.side-air.left { left: 0; background: radial-gradient(circle at 0% 50%, var(--accent), transparent 70%); }
+.side-air.right { right: 0; background: radial-gradient(circle at 100% 50%, var(--accent), transparent 70%); }
 
-.theme-cold .side-air {
-  background: radial-gradient(circle at 0% 50%, rgba(200, 240, 255, 0.4), transparent 70%);
-  backdrop-filter: blur(5px);
-  mask-image: url('https://www.transparenttextures.com/patterns/frozen-wall.png');
-}
-.theme-warm .side-air {
-  background: radial-gradient(circle at 0% 50%, rgba(255, 150, 50, 0.2), transparent 70%);
-  backdrop-filter: blur(3px);
+/* Анимация пульсации краев */
+body.theme-cold .side-air, body.theme-warm .side-air { opacity: 0.4; animation: airPulse 4s infinite alternate; }
+
+@keyframes airPulse {
+  from { transform: scaleX(1); opacity: 0.3; }
+  to { transform: scaleX(1.1); opacity: 0.5; }
 }
 
-.bottom-layer {
-  position: fixed; left: 0; right: 0; bottom: 0; height: 20vh; z-index: 10;
-  pointer-events: none; background: linear-gradient(to top, rgba(255,255,255,0.8), transparent);
+/* ШАПКА */
+.site-header {
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  backdrop-filter: blur(10px); background: rgba(255,255,255,0.7);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
 }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
+.logo { font-weight: 800; font-size: 1.6rem; }
+.logo .dot { color: var(--accent); }
+nav a { margin-right: 25px; text-decoration: none; color: #444; font-weight: 600; }
 
-/* 5. HERO СЕКЦИЯ И КОНДИЦИОНЕР */
-.hero { padding: 160px 0 100px; position: relative; z-index: 20; }
-.hero-inner { display: flex; gap: 50px; align-items: center; }
-.hero-content { flex: 1.2; }
-.hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; }
+/* HERO */
+.hero { padding: 180px 0 100px; position: relative; z-index: 10; }
+.hero-inner { display: flex; align-items: center; gap: 60px; }
+.hero-content { flex: 1; }
+.hero h1 { font-size: 3.5rem; margin-bottom: 20px; line-height: 1.1; }
 .hero .accent { color: var(--accent); }
-.hero .lead { font-size: 1.2rem; opacity: 0.7; margin-bottom: 30px; max-width: 500px; }
 
-.ac-unit-container { flex: 1; perspective: 1000px; display: flex; justify-content: center; }
-.ac-unit { width: 100%; max-width: 450px; position: relative; animation: float 4s ease-in-out infinite; }
-.ac-body {
-  background: #fff; height: 110px; border-radius: 5px 5px 25px 25px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 35px; position: relative; z-index: 2; border-bottom: 3px solid #f0f0f0;
+/* КОНДИЦИОНЕР */
+.ac-unit-container { flex: 1; display: flex; justify-content: center; }
+.ac-unit {
+  width: 450px; background: #fff; border-radius: 10px 10px 30px 30px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.1); position: relative;
+  padding: 30px; border-bottom: 4px solid #e0e0e0;
 }
+.ac-body { display: flex; align-items: center; justify-content: space-between; }
 .ac-display {
-  background: #1a1a1a; color: var(--accent); padding: 5px 15px;
-  font-family: 'Courier New', monospace; border-radius: 4px;
-  font-size: 1.3rem; box-shadow: inset 0 0 10px #000; transition: var(--transition);
+  background: #222; color: var(--accent); padding: 8px 15px;
+  font-family: monospace; font-size: 1.5rem; border-radius: 5px;
+  box-shadow: inset 0 0 10px #000;
 }
 .ac-power-btn {
-  width: 45px; height: 45px; border-radius: 50%; border: none;
-  background: #f5f5f5; cursor: pointer; color: #ccc;
-  font-size: 1.2rem; transition: var(--transition);
+  width: 50px; height: 50px; border-radius: 50%; border: none;
+  cursor: pointer; background: #eee; font-size: 1.2rem; transition: 0.3s;
 }
-.theme-cold .ac-power-btn { color: var(--cold-accent); box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
-.theme-warm .ac-power-btn { color: var(--warm-accent); box-shadow: 0 0 20px rgba(255, 140, 0, 0.4); }
+.ac-power-btn:hover { transform: scale(1.1); }
+.theme-cold .ac-power-btn { color: var(--cold-accent); box-shadow: 0 0 15px var(--cold-accent); }
+.theme-warm .ac-power-btn { color: var(--warm-accent); box-shadow: 0 0 15px var(--warm-accent); }
 
+/* ПОТОК ВОЗДУХА */
 .air-flow-down {
-  position: absolute; top: 100%; left: 10%; right: 10%; height: 200px;
-  overflow: hidden; display: flex; justify-content: space-around; pointer-events: none;
+  position: absolute; top: 100%; left: 40px; right: 40px; height: 150px;
+  display: flex; justify-content: space-around; pointer-events: none; overflow: hidden;
 }
 .air-flow-down span {
   width: 2px; height: 100%; background: linear-gradient(to bottom, var(--accent), transparent);
-  animation: flowDown 1.5s linear infinite; opacity: 0.3;
+  animation: flowAnim 1.2s infinite linear; opacity: 0.5;
 }
-
-/* 6. КАРТОЧКИ И КАТАЛОГ */
-.features, .catalog { padding: 80px 0; position: relative; z-index: 20; }
-.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.card {
-  background: var(--card); padding: 30px; border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: 0.3s;
-}
-.card i { font-size: 2rem; color: var(--accent); margin-bottom: 15px; }
-
-.products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-.product {
-  background: var(--card); border-radius: 20px; overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.4s;
-}
-.product:hover { transform: translateY(-10px); }
-.product img { width: 100%; height: 200px; object-fit: cover; }
-.product .info { padding: 20px; }
-.price { font-size: 1.4rem; font-weight: 800; color: var(--accent); margin: 10px 0; }
-.product .actions { padding: 15px; display: flex; gap: 10px; border-top: 1px solid rgba(0,0,0,0.05); }
-
-/* 7. АНИМАЦИИ */
-@keyframes flowDown {
+@keyframes flowAnim {
   0% { transform: translateY(-100%); opacity: 0; }
-  50% { opacity: 0.4; }
+  50% { opacity: 0.5; }
   100% { transform: translateY(100%); opacity: 0; }
 }
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
+
+/* КАТАЛОГ */
+.catalog { padding: 80px 0; background: #fff; position: relative; z-index: 10; }
+.products-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px; margin-top: 40px;
+}
+.product {
+  background: #fff; border: 1px solid #eee; border-radius: 20px;
+  overflow: hidden; transition: 0.3s;
+}
+.product:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+.product img { width: 100%; height: 220px; object-fit: contain; padding: 20px; background: #f9f9f9; }
+.product .info { padding: 25px; }
+.price { font-size: 1.5rem; font-weight: 800; color: var(--accent); margin: 10px 0; }
+.btn {
+  display: inline-block; padding: 12px 25px; background: var(--accent);
+  color: #fff; text-decoration: none; border-radius: 10px; font-weight: 700;
 }
 
-/* 8. АДАПТИВ */
 @media (max-width: 900px) {
   .hero-inner { flex-direction: column; text-align: center; }
-  .hero h1 { font-size: 2.5rem; }
-  .side-air { display: none; }
-  .cards { grid-template-columns: 1fr; }
-  .ac-unit { max-width: 320px; }
+  .ac-unit { width: 100%; }
+  .side-air { width: 30vw; }
 }
