@@ -1,162 +1,154 @@
-:root{
-  --bg:#f3f9ff;
-  --text:#122;
-  --accent:#00aaff;
-  --card:#ffffff;
-  --cold-air: rgba(0,170,255,0.14);
-  --warm-air: rgba(255,140,40,0.12);
-  --glass: rgba(255,255,255,0.6);
+/* 1. ПЕРЕМЕННЫЕ И ТЕМЫ */
+:root {
+  --bg: #f3f9ff;
+  --text: #122;
+  --accent: #0099ff;
+  --card: #ffffff;
+  --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --cold-accent: #00d4ff;
+  --warm-accent: #ff8c00;
+  --air-color: rgba(0, 153, 255, 0.16);
 }
 
-/* COMMON RESET */
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{
-  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+body.theme-cold {
+  --bg: #eef8ff;
+  --text: #082231;
+  --accent: var(--cold-accent);
+  --card: #ffffff;
+  --air-color: rgba(0, 212, 255, 0.2);
+}
+
+body.theme-warm {
+  --bg: linear-gradient(180deg, #fff6ee, #ffe9d6);
+  --text: #2a1607;
+  --accent: var(--warm-accent);
+  --card: #fff8f2;
+  --air-color: rgba(255, 140, 0, 0.15);
+}
+
+/* 2. СБРОС И БАЗА */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; scroll-behavior: smooth; }
+body {
+  font-family: Inter, "Segoe UI", Roboto, sans-serif;
   background: var(--bg);
-  color:var(--text);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  overflow-x:hidden;
+  color: var(--text);
+  transition: background 0.6s ease;
+  overflow-x: hidden;
+}
+.wrap { width: 90%; max-width: 1200px; margin: 0 auto; }
+
+/* 3. ШАПКА */
+.site-header {
+  position: fixed; left: 0; right: 0; top: 0; z-index: 100;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; }
+.logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
+.logo .dot { color: var(--accent); }
+nav a { margin: 0 15px; color: inherit; text-decoration: none; font-weight: 600; opacity: 0.8; transition: 0.3s; }
+nav a:hover { opacity: 1; color: var(--accent); }
+.cta { background: var(--accent); color: #fff; padding: 10px 20px; border-radius: 30px; text-decoration: none; font-weight: 700; transition: 0.3s; }
+
+/* 4. ВИЗУАЛЬНЫЕ ЭФФЕКТЫ (БОКА И НИЗ) */
+.side-air {
+  position: fixed; top: 0; bottom: 0; width: 15vw; z-index: 5;
+  pointer-events: none; transition: var(--transition);
+}
+.side-air.left { left: 0; }
+.side-air.right { right: 0; transform: scaleX(-1); }
+
+.theme-cold .side-air {
+  background: radial-gradient(circle at 0% 50%, rgba(200, 240, 255, 0.4), transparent 70%);
+  backdrop-filter: blur(5px);
+  mask-image: url('https://www.transparenttextures.com/patterns/frozen-wall.png');
+}
+.theme-warm .side-air {
+  background: radial-gradient(circle at 0% 50%, rgba(255, 150, 50, 0.2), transparent 70%);
+  backdrop-filter: blur(3px);
 }
 
-/* wrapper */
-.wrap{width:90%;max-width:1200px;margin:0 auto}
-
-/* HEADER */
-.site-header{
-  position:fixed;left:0;right:0;top:0;z-index:40;
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0));
-  backdrop-filter: blur(6px);
-  border-bottom:1px solid rgba(0,0,0,0.05);
-}
-.site-header .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-.logo{font-weight:700;font-size:1.25rem}
-nav a{margin:0 10px;color:inherit;text-decoration:none;font-weight:600}
-.cta{background:var(--accent);color:#fff;padding:8px 14px;border-radius:20px;text-decoration:none}
-
-/* THEME SWITCHER (center top) */
-.theme-switcher{
-  position:fixed;left:50%;transform:translateX(-50%);top:76px;z-index:60;
-  display:flex;align-items:center;justify-content:center;
-}
-.theme-switcher button{
-  width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;font-size:20px;
-  box-shadow:0 6px 18px rgba(2,12,30,0.12);background:linear-gradient(180deg,rgba(255,255,255,0.9),#fff);
-  transition:transform .25s, background .4s;
-}
-.theme-switcher button:active{transform:scale(.97)}
-.theme-switcher .icon-snow{display:inline-block}
-.theme-switcher .icon-sun{display:inline-block;margin-left:6px}
-
-/* SIDE AIR - left/right zones (only at sides, not over content) */
-.side-air{
-  position:fixed;top:0;height:100%;width:18vw;max-width:220px;z-index:10;pointer-events:none;
-  mix-blend-mode:screen;
-}
-.side-air.left{left:0;display:block}
-.side-air.right{right:0;transform:scaleX(-1);display:block}
-
-/* draw animated flowing gradients with multiple layers */
-.side-air::before,
-.side-air::after{
-  content:"";position:absolute;inset:0;border-radius:0;
-  background:linear-gradient(180deg,transparent,transparent);
-  opacity:0.95;
-  filter:blur(20px) saturate(120%);
-}
-.side-air::before{
-  background: radial-gradient(closest-side, var(--air-color), transparent 60%);
-  animation: drift 8s linear infinite;
-  opacity:.85;
-}
-.side-air::after{
-  background: linear-gradient(180deg, transparent 10%, var(--air-color) 45%, transparent 80%);
-  animation: wave 6s ease-in-out infinite;
-  opacity:.6;
-  transform: translateY(10%);
+.bottom-layer {
+  position: fixed; left: 0; right: 0; bottom: 0; height: 20vh; z-index: 10;
+  pointer-events: none; background: linear-gradient(to top, rgba(255,255,255,0.8), transparent);
 }
 
-/* HERO */
-.hero{padding-top:120px;padding-bottom:90px}
-.hero-inner{display:flex;gap:30px;align-items:center}
-.hero-left{flex:1}
-.hero-right{flex:1;display:flex;align-items:center;justify-content:center}
-.hero h1{font-size:2.2rem;line-height:1.05}
-.hero .lead{margin-top:8px;color:rgba(0,0,0,0.6)}
-.hero-actions{margin-top:18px;display:flex;gap:12px}
-.btn{background:var(--accent);color:#fff;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700}
-.btn-outline{background:transparent;border:2px solid var(--accent);color:var(--accent)}
+/* 5. HERO СЕКЦИЯ И КОНДИЦИОНЕР */
+.hero { padding: 160px 0 100px; position: relative; z-index: 20; }
+.hero-inner { display: flex; gap: 50px; align-items: center; }
+.hero-content { flex: 1.2; }
+.hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; }
+.hero .accent { color: var(--accent); }
+.hero .lead { font-size: 1.2rem; opacity: 0.7; margin-bottom: 30px; max-width: 500px; }
 
-/* product-show */
-.product-show{width:320px;height:220px;border-radius:16px;overflow:hidden;position:relative;background:var(--card);box-shadow:0 10px 30px rgba(2,12,30,0.08)}
-.product-show img{width:100%;height:100%;object-fit:cover;display:block}
-.product-tag{position:absolute;left:12px;top:12px;background:rgba(0,0,0,0.55);color:#fff;padding:6px 10px;border-radius:10px;font-weight:700}
-
-/* FEATURES */
-.features{padding:48px 0}
-.features h2{text-align:center;margin-bottom:20px}
-.cards{display:flex;gap:16px;justify-content:center;margin-top:12px}
-.card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 20px rgba(2,12,30,0.06);width:240px;text-align:center}
-.card i{font-size:22px;color:var(--accent);margin-bottom:10px}
-
-/* CATALOG */
-.catalog{padding:60px 0}
-.catalog h2{text-align:center;margin-bottom:6px}
-.catalog-sub{text-align:center;color:rgba(0,0,0,0.55);margin-bottom:20px}
-.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-
-/* product card */
-.product{
-  background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(2,12,30,0.06);
-  display:flex;flex-direction:column;transition:transform .25s;
+.ac-unit-container { flex: 1; perspective: 1000px; display: flex; justify-content: center; }
+.ac-unit { width: 100%; max-width: 450px; position: relative; animation: float 4s ease-in-out infinite; }
+.ac-body {
+  background: #fff; height: 110px; border-radius: 5px 5px 25px 25px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 35px; position: relative; z-index: 2; border-bottom: 3px solid #f0f0f0;
 }
-.product:hover{transform:translateY(-6px)}
-.product img{height:160px;width:100%;object-fit:cover}
-.product .info{padding:12px;flex:1;display:flex;flex-direction:column;gap:8px}
-.product .info h3{font-size:1.05rem}
-.price{font-weight:800;color:var(--accent)}
-.product .actions{display:flex;gap:8px;padding:12px;border-top:1px solid rgba(0,0,0,0.04)}
-
-/* BOTTOM LAYER — frost / warm smoke */
-.bottom-layer{
-  position:fixed;left:0;right:0;bottom:0;height:26vh;max-height:260px;z-index:30;
-  pointer-events:none;display:flex;align-items:flex-end;justify-content:center;
-  transition:height .5s;
+.ac-display {
+  background: #1a1a1a; color: var(--accent); padding: 5px 15px;
+  font-family: 'Courier New', monospace; border-radius: 4px;
+  font-size: 1.3rem; box-shadow: inset 0 0 10px #000; transition: var(--transition);
 }
-.frost{
-  width:100%;height:100%;background:linear-gradient(180deg, rgba(255,255,255,0.0), rgba(255,255,255,0.85));
-  backdrop-filter: blur(6px) saturate(140%);mask-image:linear-gradient(#000 45%, transparent 100%);
-  transition:mask-position .45s, opacity .35s;
-  position:relative;
-  box-shadow: inset 0 8px 40px rgba(255,255,255,0.15);
+.ac-power-btn {
+  width: 45px; height: 45px; border-radius: 50%; border: none;
+  background: #f5f5f5; cursor: pointer; color: #ccc;
+  font-size: 1.2rem; transition: var(--transition);
+}
+.theme-cold .ac-power-btn { color: var(--cold-accent); box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
+.theme-warm .ac-power-btn { color: var(--warm-accent); box-shadow: 0 0 20px rgba(255, 140, 0, 0.4); }
+
+.air-flow-down {
+  position: absolute; top: 100%; left: 10%; right: 10%; height: 200px;
+  overflow: hidden; display: flex; justify-content: space-around; pointer-events: none;
+}
+.air-flow-down span {
+  width: 2px; height: 100%; background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: flowDown 1.5s linear infinite; opacity: 0.3;
 }
 
-/* reveal effect — text below will appear as user scrolls up */
-.reveal-from-frost{transform:translateY(40px);opacity:0;transition:transform .6s ease, opacity .6s ease}
-
-/* FOOTER */
-.footer{padding:28px 0;background:linear-gradient(180deg,#0b1b26,#122632);color:#d9ecff;margin-top:40px}
-.footer .wrap{display:flex;justify-content:space-between;align-items:center}
-
-/* ANIMATIONS */
-@keyframes drift{0%{transform:translateY(-8%) translateX(0)}50%{transform:translateY(8%) translateX(6%)}100%{transform:translateY(-8%) translateX(0)}}
-@keyframes wave{0%{transform:translateY(0) scaleY(1)}50%{transform:translateY(6%) scaleY(1.05)}100%{transform:translateY(0) scaleY(1)}}
-
-/* THEMES */
-body.theme-cold{
-  --bg:#eef8ff;--text:#082231;--accent:#0099ff;--card:#ffffff;--air-color: rgba(0,153,255,0.16);--glass:rgba(255,255,255,0.75)
+/* 6. КАРТОЧКИ И КАТАЛОГ */
+.features, .catalog { padding: 80px 0; position: relative; z-index: 20; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.card {
+  background: var(--card); padding: 30px; border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: 0.3s;
 }
-body.theme-warm{
-  --bg:linear-gradient(180deg,#fff6ee,#ffe9d6);--text:#2a1607;--accent:#ff8800;--card:#fff8f2;--air-color: rgba(255,130,30,0.16);--glass:rgba(255,250,240,0.8)
-  background: linear-gradient(180deg,#fff6ee,#ffe9d6);
+.card i { font-size: 2rem; color: var(--accent); margin-bottom: 15px; }
+
+.products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+.product {
+  background: var(--card); border-radius: 20px; overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.4s;
+}
+.product:hover { transform: translateY(-10px); }
+.product img { width: 100%; height: 200px; object-fit: cover; }
+.product .info { padding: 20px; }
+.price { font-size: 1.4rem; font-weight: 800; color: var(--accent); margin: 10px 0; }
+.product .actions { padding: 15px; display: flex; gap: 10px; border-top: 1px solid rgba(0,0,0,0.05); }
+
+/* 7. АНИМАЦИИ */
+@keyframes flowDown {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 0.4; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
 }
 
-/* small screens */
-@media (max-width:900px){
-  .hero-inner{flex-direction:column}
-  .theme-switcher{top:92px}
-  .side-air{display:none}
-  .bottom-layer{height:32vh}
+/* 8. АДАПТИВ */
+@media (max-width: 900px) {
+  .hero-inner { flex-direction: column; text-align: center; }
+  .hero h1 { font-size: 2.5rem; }
+  .side-air { display: none; }
+  .cards { grid-template-columns: 1fr; }
+  .ac-unit { max-width: 320px; }
 }
