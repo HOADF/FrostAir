@@ -4,25 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>FrostAir — климатические системы</title>
-  <meta name="description" content="Каталог кондиционеров — тёплая и холодная тема, визуализация потока воздуха, иней/дымка.">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body class="theme-cold">
 
-  <!-- THEME SWITCHER (center top) -->
-  <div class="theme-switcher" id="themeSwitcher" title="Переключить тему">
-    <button id="themeToggle" aria-label="Переключить тёплую/холодную тему">
-      <span class="icon-snow">❄</span>
-      <span class="icon-sun">☀</span>
-    </button>
-  </div>
-
-  <!-- SIDE AIR (left/right) — видно только в боковых зонах -->
   <div class="side-air left" aria-hidden="true"></div>
   <div class="side-air right" aria-hidden="true"></div>
 
-  <!-- Header -->
   <header class="site-header">
     <div class="wrap">
       <div class="logo">FrostAir<span class="dot">.</span></div>
@@ -30,81 +19,46 @@
         <a href="#hero">Главная</a>
         <a href="#catalog">Каталог</a>
         <a href="#about">О нас</a>
-        <a href="#contacts">Контакты</a>
       </nav>
       <a href="#contacts" class="cta">Заказать</a>
     </div>
   </header>
 
-  <!-- HERO -->
-<section id="hero" class="hero">
-  <div class="hero-inner">
-    <div class="hero-content">
-      <h1>Комфорт в одно <br><span class="accent">касание</span></h1>
-      <p class="lead">Интеллектуальное управление климатом. Почувствуйте разницу прямо сейчас, переключив режим на кондиционере.</p>
-      <div class="hero-actions">
-        <a href="#catalog" class="btn">Каталог моделей</a>
-      </div>
-    </div>
-
-    <div class="ac-unit-container">
-      <div class="ac-unit">
-        <div class="ac-body">
-          <div class="ac-display">
-            <span id="temp-display">21°C</span>
-          </div>
-          <div class="ac-vent"></div>
-          <button id="themeToggle" class="ac-power-btn" aria-label="Смена режима">
-            <i class="fa-solid fa-power-off"></i>
-          </button>
-        </div>
-        <div class="air-flow-down">
-          <span></span><span></span><span></span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-  <!-- FEATURES -->
-  <section id="about" class="features">
+  <section id="hero" class="hero">
     <div class="wrap">
-      <h2>Почему выбирают нас</h2>
-      <div class="cards">
-        <div class="card"><i class="fa-solid fa-snowflake"></i><h3>Эффективность</h3><p>Инверторные технологии для экономии энергии.</p></div>
-        <div class="card"><i class="fa-solid fa-wind"></i><h3>Тихая работа</h3><p>Уровень шума от 19 дБ — почти не слышно.</p></div>
-        <div class="card"><i class="fa-solid fa-tools"></i><h3>Установка</h3><p>Профессиональный монтаж и сервис.</p></div>
+      <div class="hero-inner">
+        <div class="hero-content">
+          <h1>Комфорт в одно <br><span class="accent">касание</span></h1>
+          <p class="lead">Интеллектуальный климат. Нажмите на кнопку <b>Power</b> на кондиционере для смены режима.</p>
+          <div class="hero-actions">
+            <a href="#catalog" class="btn">Каталог моделей</a>
+          </div>
+        </div>
+
+        <div class="ac-unit-container">
+          <div class="ac-unit">
+            <div class="ac-body">
+              <div class="ac-display"><span id="temp-display">18°C</span></div>
+              <div class="ac-vent"></div>
+              <button id="themeToggle" class="ac-power-btn"><i class="fa-solid fa-power-off"></i></button>
+            </div>
+            <div class="air-flow-down"><span></span><span></span><span></span><span></span></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- CATALOG -->
   <section id="catalog" class="catalog">
     <div class="wrap">
-      <h2>Каталог кондиционеров</h2>
-      <p class="catalog-sub">Примеры моделей — реальные названия. Фото — репрезентации для демонстрации.</p>
-
-      <div id="productsGrid" class="products-grid">
-        <!-- карточки будут сгенерированы JS -->
-      </div>
+      <h2>Каталог систем</h2>
+      <div id="productsGrid" class="products-grid"></div>
     </div>
   </section>
 
-  <!-- FROST / WARM LAYER (внизу) -->
-  <div id="bottomLayer" class="bottom-layer" aria-hidden="true">
-    <div class="frost"></div>
-  </div>
-
-  <!-- CONTACTS / FOOTER -->
   <footer id="contacts" class="footer">
     <div class="wrap">
-      <div class="footer-left">
-        <h3>FrostAir</h3>
-        <p>Демо-сайт — контакты вымышлены.</p>
-      </div>
-      <div class="footer-right">
-        <p>© <span id="year"></span> FrostAir Demo</p>
-      </div>
+      <p>© <span id="year"></span> FrostAir — Технологии комфорта</p>
     </div>
   </footer>
 
