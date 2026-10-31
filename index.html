@@ -12,6 +12,17 @@
   <div class="side-air left" aria-hidden="true"></div>
   <div class="side-air right" aria-hidden="true"></div>
 
+  <!-- Компактный виджет кондиционера — зафиксирован вверху и виден
+       независимо от прокрутки страницы, синхронизирован с основным блоком -->
+  <div class="floating-ac" aria-label="Текущий режим климата">
+    <i class="fa-solid fa-snowflake floating-ac__icon floating-ac__icon--cold"></i>
+    <span class="floating-ac__temp" data-temp-display>18°C</span>
+    <i class="fa-solid fa-fire floating-ac__icon floating-ac__icon--warm"></i>
+    <button class="floating-ac__btn" data-theme-toggle aria-label="Переключить режим климата">
+      <i class="fa-solid fa-power-off"></i>
+    </button>
+  </div>
+
   <header class="site-header">
     <div class="wrap">
       <div class="logo">FrostAir<span class="dot">.</span></div>
@@ -38,9 +49,9 @@
         <div class="ac-unit-container">
           <div class="ac-unit">
             <div class="ac-body">
-              <div class="ac-display"><span id="temp-display">18°C</span></div>
+              <div class="ac-display"><span data-temp-display>18°C</span></div>
               <div class="ac-vent"></div>
-              <button id="themeToggle" class="ac-power-btn"><i class="fa-solid fa-power-off"></i></button>
+              <button class="ac-power-btn" data-theme-toggle><i class="fa-solid fa-power-off"></i></button>
             </div>
             <div class="air-flow-down"><span></span><span></span><span></span><span></span></div>
           </div>
