@@ -97,4 +97,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // --- Выпадающее меню кондиционера-шапки на мобильном ---
+  const burger = document.getElementById('acBurger');
+  const dropdown = document.getElementById('acDropdown');
+  if (burger && dropdown) {
+    burger.addEventListener('click', () => {
+      const isOpen = dropdown.classList.toggle('active');
+      burger.setAttribute('aria-expanded', String(isOpen));
+    });
+    dropdown.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        dropdown.classList.remove('active');
+        burger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
 });
