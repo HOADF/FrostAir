@@ -239,6 +239,36 @@ body.is-off .air-flow-down { opacity: 0; }
   color: #fff; text-decoration: none; border-radius: 10px; font-weight: 700;
 }
 
+/* О НАС */
+.about { padding: 90px 0; background: var(--cold-bg); position: relative; z-index: 10; transition: background 0.8s ease; }
+body.theme-warm .about { background: var(--warm-bg); }
+.about-grid {
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 60px; align-items: center;
+}
+.about-text h2 { font-size: 2.2rem; margin-bottom: 20px; }
+.about-text p { color: #444; line-height: 1.6; margin-bottom: 16px; }
+.about-text p:last-child { margin-bottom: 0; }
+.about-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+.stat {
+  background: #fff; border-radius: 18px; padding: 24px 16px;
+  text-align: center; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+}
+.stat__num { display: block; font-size: 1.8rem; font-weight: 800; color: var(--accent); }
+.stat__label { display: block; font-size: 0.85rem; color: #666; margin-top: 6px; }
+
+/* ФУТЕР / КОНТАКТЫ */
+.footer { padding: 50px 0; background: #1c1c1c; color: #cfd3d6; position: relative; z-index: 10; }
+.footer-grid {
+  display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center;
+}
+.footer-contacts { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 26px; }
+.footer-contacts a { color: #fff; font-weight: 700; text-decoration: none; }
+.footer-contacts a:hover { color: var(--accent); }
+.footer-contacts p { margin: 0; color: #aeb4b8; }
+.footer-copy { color: #8b9196; font-size: 0.9rem; }
+
 @media (max-width: 860px) {
   /* на корпусе не хватает места под меню и регулятор — прячем их за «Пульт» */
   .ac-header__nav { display: none; }
@@ -254,6 +284,9 @@ body.is-off .air-flow-down { opacity: 0; }
   .hero h1 { font-size: 2.3rem; }
   .hero-content { padding: 36px 26px; }
   .side-fx { width: 20vw; }
+
+  .about-grid { grid-template-columns: 1fr; gap: 36px; text-align: center; }
+  .about-stats { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 480px) {
@@ -265,6 +298,9 @@ body.is-off .air-flow-down { opacity: 0; }
   .hero { padding: 160px 0 70px; }
   .hero h1 { font-size: 1.7rem; }
   .hero-content { padding: 28px 18px; border-radius: 22px; }
+
+  .about-stats { grid-template-columns: 1fr; }
+  .footer-contacts { flex-direction: column; gap: 10px; }
   .side-fx { width: 14vw; }
   .air-flow-down { left: 30px; right: 30px; }
 }
