@@ -40,7 +40,10 @@
 
           <!-- кнопка питания — теперь только вкл/выкл, режим не переключает -->
           <button class="power-btn" data-power-toggle type="button" aria-label="Включить или выключить кондиционер" aria-pressed="true">
-            <i class="fa-solid fa-power-off"></i>
+            <svg class="power-btn__icon" width="18" height="18" viewBox="0 0 24 24" role="img" aria-label="Питание">
+              <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 3v7"/>
+              <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6.8 5.6a8 8 0 1 0 10.4 0"/>
+            </svg>
           </button>
 
           <!-- на мобильном вместо бургер-меню — кнопка «Пульт», открывающая полноэкранную панель управления -->
@@ -141,7 +144,10 @@
       </div>
 
       <button class="power-btn remote-overlay__power" data-power-toggle type="button" aria-label="Включить или выключить кондиционер" aria-pressed="true">
-        <i class="fa-solid fa-power-off"></i>
+        <svg class="power-btn__icon" width="28" height="28" viewBox="0 0 24 24" role="img" aria-label="Питание">
+          <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 3v7"/>
+          <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6.8 5.6a8 8 0 1 0 10.4 0"/>
+        </svg>
         <span>Питание</span>
       </button>
 

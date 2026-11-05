@@ -94,11 +94,17 @@ body.is-off .status-display { color: #6b6b6b; }
 
 .power-btn {
   width: 38px; height: 38px; border-radius: 50%; border: none;
-  cursor: pointer; background: #eee; font-size: 1rem; transition: 0.3s;
+  cursor: pointer; background: #eee; transition: 0.3s;
   flex-shrink: 0; color: var(--accent); box-shadow: 0 0 12px var(--accent);
+  display: flex; align-items: center; justify-content: center;
 }
 .power-btn:hover { transform: scale(1.08); }
 body.is-off .power-btn { color: #999; box-shadow: none; background: #eee; }
+
+/* свой SVG вместо иконки шрифта — та же причина, что и у значка режима
+   на табло: глиф шрифта не центрирован внутри своего квадрата сам по
+   себе, из-за чего в пилюле «Питание» он визуально уезжал от центра */
+.power-btn__icon { width: 18px; height: 18px; display: block; }
 
 /* кнопка «Пульт» — скрыта на десктопе, появляется на мобильном вместо старого бургер-меню */
 .ac-header__remote-trigger {
@@ -153,8 +159,9 @@ body.is-off .ac-header__vent { filter: grayscale(1) brightness(0.96); }
 .remote-overlay__power {
   width: auto; height: auto; border-radius: 999px; flex-direction: column;
   display: flex; align-items: center; gap: 4px;
-  padding: 14px 32px; font-size: 1.4rem;
+  padding: 14px 32px;
 }
+.remote-overlay__power .power-btn__icon { width: 28px; height: 28px; }
 .remote-overlay__power span { font-size: 0.75rem; font-weight: 700; }
 .remote-overlay__nav {
   width: 100%; display: flex; flex-direction: column; gap: 10px;
@@ -282,7 +289,10 @@ body.theme-warm .about { background: var(--warm-bg); }
   .ac-header__casing { padding: 10px 16px 12px; gap: 10px; }
   .ac-header__logo { font-size: 1.15rem; }
   .status-display { font-size: 0.85rem; padding: 6px 10px; min-width: 52px; }
-  .power-btn { width: 34px; height: 34px; }
+  /* только круглая кнопка в шапке — иначе это же правило по совпадению
+     класса .power-btn сжимало и кнопку-пилюлю «Питание» в пульте,
+     схлопывая внутреннюю иконку до нулевой высоты */
+  .ac-header__controls .power-btn { width: 34px; height: 34px; }
 
   .hero { padding: 180px 0 90px; }
   .hero h1 { font-size: 2.3rem; }
