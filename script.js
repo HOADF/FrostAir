@@ -30,6 +30,39 @@ function acUnitIconMarkup(accentColor) {
   `;
 }
 
+// Значок режима на табло — inline-SVG вместо иконки из внешнего шрифта.
+// У символов Font Awesome «плывущая» вертикальная метрика (у разных
+// иконок разный визуальный центр внутри своего квадрата), из-за чего
+// рядом с текстом температуры они садятся то выше, то ниже базовой
+// линии. SVG с собственным viewBox центрируется предсказуемо через CSS
+// (width/height: 1em, display: block) независимо от символа.
+function modeIconSvg(kind) {
+  if (kind === 'warm') {
+    return `
+      <svg class="status-display__icon-svg" viewBox="0 0 24 24" role="img" aria-label="Обогрев">
+        <path fill="currentColor" d="M12.5 2.3c.6 2.4-1.6 3.6-1.6 6.1a2.6 2.6 0 0 0 5.2 0c0-.9-.3-1.5-.7-2 .7 2.3-.8 3.1-1.6 3.1a1.6 1.6 0 0 1-1.6-1.7c0-1.5.9-1.9.9-3.3-1.7.9-3.4 3.3-3.4 5.9a5.3 5.3 0 1 0 10.6 0c0-4.3-3.4-5.1-3.4-8.1-1.4.3-2.8 1.3-3.4 0z"/>
+      </svg>
+    `;
+  }
+  if (kind === 'off') {
+    return `
+      <svg class="status-display__icon-svg" viewBox="0 0 24 24" role="img" aria-label="Выключено">
+        <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 3v7"/>
+        <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6.8 5.6a8 8 0 1 0 10.4 0"/>
+      </svg>
+    `;
+  }
+  return `
+    <svg class="status-display__icon-svg" viewBox="0 0 24 24" role="img" aria-label="Охлаждение">
+      <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <line x1="12" y1="2.5" x2="12" y2="21.5"/>
+        <line x1="4.4" y1="6.75" x2="19.6" y2="17.25"/>
+        <line x1="4.4" y1="17.25" x2="19.6" y2="6.75"/>
+      </g>
+    </svg>
+  `;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
   const grid = document.getElementById('productsGrid');
@@ -122,10 +155,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     modeIconEls.forEach(el => {
-      const iconClass = !state.isOn
-        ? 'fa-solid fa-power-off'
-        : (isWarm ? 'fa-solid fa-fire' : 'fa-solid fa-snowflake');
-      el.className = `status-display__icon ${iconClass}`;
+      const kind = !state.isOn ? 'off' : (isWarm ? 'warm' : 'cold');
+      el.innerHTML = modeIconSvg(kind);
     });
 
     powerBtns.forEach(btn => btn.setAttribute('aria-pressed', String(state.isOn)));
@@ -222,12 +253,13 @@ document.addEventListener('DOMContentLoaded', () => {
     return {
       x: rand(0, width),
       y: rand(0, height) + height, // старт ниже видимой области, чтобы марево «вырастало» из-под низа
-      len: rand(50, 100),
-      speed: rand(26, 55),
-      sway: rand(0, Math.PI * 2),
-      swaySpeed: rand(1.2, 2.4),
-      width: rand(6, 14),
-      opacity: rand(0.22, 0.45)
+      len: rand(100, 170),
+      speed: rand(28, 52),
+      phase: rand(0, Math.PI * 2),
+      freq: rand(0.02, 0.035),
+      amplitude: rand(3, 7),
+      width: rand(1.4, 2.4),
+      opacity: rand(0.28, 0.5)
     };
   }
 
@@ -285,20 +317,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         entry.ctx.shadowBlur = 0;
       } else {
+        // тонкая волнистая линия, собранная из нескольких отрезков —
+        // читается как настоящее марево от нагретого воздуха, а не
+        // как капля (раньше одна толстая кривая с круглыми концами
+        // на узком мобильном canvas выглядела как «шарик»)
+        const segments = 16;
+        const waveAmp = intensity * 0.6 + 0.4;
         entry.particles.forEach(p => {
-          p.sway += dt * p.swaySpeed;
           p.y -= p.speed * dt * (0.6 + intensity * 0.8);
-          const offset = Math.sin(p.sway) * (6 + intensity * 10);
+
+          entry.ctx.beginPath();
+          for (let i = 0; i <= segments; i++) {
+            const t = i / segments;
+            const py = p.y - t * p.len;
+            const px = p.x + Math.sin(p.phase + py * p.freq + now * 0.0016) * p.amplitude * waveAmp;
+            if (i === 0) entry.ctx.moveTo(px, py);
+            else entry.ctx.lineTo(px, py);
+          }
           const grad = entry.ctx.createLinearGradient(p.x, p.y, p.x, p.y - p.len);
           grad.addColorStop(0, `rgba(255,140,0,${p.opacity})`);
           grad.addColorStop(1, 'rgba(255,140,0,0)');
           entry.ctx.strokeStyle = grad;
           entry.ctx.lineWidth = p.width;
           entry.ctx.lineCap = 'round';
-          entry.ctx.beginPath();
-          entry.ctx.moveTo(p.x, p.y);
-          entry.ctx.quadraticCurveTo(p.x + offset, p.y - p.len / 2, p.x, p.y - p.len);
+          entry.ctx.lineJoin = 'round';
           entry.ctx.stroke();
+
           if (p.y < -p.len) {
             Object.assign(p, spawnHeat(width, height));
             p.y = height + p.len;

@@ -77,7 +77,11 @@ body.is-off .status-led {
   min-width: 64px; justify-content: center;
   transition: color 0.4s ease;
 }
-.status-display__icon { font-size: 0.95em; }
+/* значок режима — свой SVG, а не иконка внешнего шрифта: у символов
+   шрифта разный визуальный центр внутри квадрата, из-за чего рядом
+   с цифрами они «плыли» по вертикали; SVG центрируется предсказуемо */
+.status-display__icon { display: inline-flex; align-items: center; justify-content: center; line-height: 0; }
+.status-display__icon-svg { width: 1em; height: 1em; display: block; }
 body.is-off .status-display { color: #6b6b6b; }
 
 .ac-header__dial { display: flex; gap: 6px; }
