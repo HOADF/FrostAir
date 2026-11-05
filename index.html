@@ -9,52 +9,67 @@
 </head>
 <body class="theme-cold">
 
-  <!-- Шапка сайта — она же сам кондиционер: меню и управление на его корпусе -->
+  <!-- Шапка сайта — она же сам кондиционер: корпус + решётка + пульт управления на нём -->
   <header class="ac-header" id="acHeader">
-    <div class="ac-header__casing wrap">
-      <div class="ac-header__logo">FrostAir<span class="dot">.</span></div>
+    <div class="ac-header__unit wrap">
+      <div class="ac-header__casing">
+        <div class="ac-header__logo">FrostAir<span class="dot">.</span></div>
 
-      <nav class="ac-header__nav" id="acNav">
-        <a href="#hero">Главная</a>
-        <a href="#catalog">Каталог</a>
-        <a href="#about">О нас</a>
-        <a href="#contacts" class="ac-header__cta">Заказать</a>
-      </nav>
+        <nav class="ac-header__nav" id="acNav">
+          <a href="#hero">Главная</a>
+          <a href="#catalog">Каталог</a>
+          <a href="#about">О нас</a>
+          <a href="#contacts" class="ac-header__cta">Заказать</a>
+        </nav>
 
-      <div class="ac-header__controls">
-        <div class="ac-header__display"><span data-temp-display>18°C</span></div>
-        <button class="ac-header__power" data-theme-toggle aria-label="Переключить режим климата">
-          <i class="fa-solid fa-power-off"></i>
-        </button>
-        <button class="ac-header__burger" id="acBurger" aria-label="Открыть меню" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
+        <div class="ac-header__controls">
+          <!-- индикатор работы: светится и подрагивает, пока кондиционер включён -->
+          <span class="status-led" data-led aria-hidden="true"></span>
+
+          <!-- табло: показывает текущий заданный режим (иконка) и температуру -->
+          <div class="status-display" data-display>
+            <i class="status-display__icon" data-mode-icon aria-hidden="true"></i>
+            <span data-temp-display>18°C</span>
+          </div>
+
+          <!-- регулятор температуры — отдельно от кнопки питания -->
+          <div class="ac-header__dial">
+            <button class="dial-btn" data-temp-down type="button" aria-label="Понизить температуру">−</button>
+            <button class="dial-btn" data-temp-up type="button" aria-label="Повысить температуру">+</button>
+          </div>
+
+          <!-- кнопка питания — теперь только вкл/выкл, режим не переключает -->
+          <button class="power-btn" data-power-toggle type="button" aria-label="Включить или выключить кондиционер" aria-pressed="true">
+            <i class="fa-solid fa-power-off"></i>
+          </button>
+
+          <!-- на мобильном вместо бургер-меню — кнопка «Пульт», открывающая полноэкранную панель управления -->
+          <button class="ac-header__remote-trigger" id="remoteTrigger" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="remoteOverlay">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Пульт</span>
+          </button>
+        </div>
       </div>
+
+      <!-- вентиляционная решётка — нижняя кромка того же корпуса, во всю его ширину -->
+      <div class="ac-header__vent" aria-hidden="true"></div>
     </div>
-
-    <!-- вентиляционная решётка — нижняя кромка корпуса -->
-    <div class="ac-header__vent" aria-hidden="true"></div>
-
-    <!-- выпадающее меню на мобильном: на корпусе не хватает места под все пункты -->
-    <nav class="ac-header__dropdown" id="acDropdown">
-      <a href="#hero">Главная</a>
-      <a href="#catalog">Каталог</a>
-      <a href="#about">О нас</a>
-      <a href="#contacts" class="ac-header__cta">Заказать</a>
-    </nav>
   </header>
 
   <section id="hero" class="hero">
-    <div class="side-air left" aria-hidden="true"></div>
-    <div class="side-air right" aria-hidden="true"></div>
+    <!-- фоновый эффект работы кондиционера по бокам: снег при охлаждении, тепловое марево при обогреве -->
+    <canvas class="side-fx side-fx--left" id="fxLeft" aria-hidden="true"></canvas>
+    <canvas class="side-fx side-fx--right" id="fxRight" aria-hidden="true"></canvas>
+
     <div class="air-flow-down" aria-hidden="true">
       <span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
 
     <div class="wrap">
+      <!-- карточка с текстом — на переднем плане, не зависит от фоновых эффектов по бокам -->
       <div class="hero-content">
-        <h1>Комфорт в одно <br><span class="accent">касание</span></h1>
-        <p class="lead">Интеллектуальный климат. Нажмите на кнопку <b>Power</b> на кондиционере наверху для смены режима.</p>
+        <h1>Тишина, которую <br><span class="accent">чувствуешь кожей</span></h1>
+        <p class="lead">Инверторные климат-системы держат нужную температуру точно до градуса и почти бесшумно — от летней жары до зимних морозов.</p>
         <div class="hero-actions">
           <a href="#catalog" class="btn">Каталог моделей</a>
         </div>
@@ -74,6 +89,40 @@
       <p>© <span id="year"></span> FrostAir — Технологии комфорта</p>
     </div>
   </footer>
+
+  <!-- полноэкранный «пульт» — на мобильном открывается по кнопке в шапке, дублирует управление -->
+  <div class="remote-overlay" id="remoteOverlay" role="dialog" aria-modal="true" aria-label="Пульт управления кондиционером" hidden>
+    <div class="remote-overlay__backdrop" data-remote-close></div>
+    <div class="remote-overlay__panel">
+      <button class="remote-overlay__close" data-remote-close type="button" aria-label="Закрыть пульт">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <span class="status-led" data-led aria-hidden="true"></span>
+
+      <div class="status-display" data-display>
+        <i class="status-display__icon" data-mode-icon aria-hidden="true"></i>
+        <span data-temp-display>18°C</span>
+      </div>
+
+      <div class="remote-overlay__dial">
+        <button class="dial-btn" data-temp-down type="button" aria-label="Понизить температуру">−</button>
+        <button class="dial-btn" data-temp-up type="button" aria-label="Повысить температуру">+</button>
+      </div>
+
+      <button class="power-btn remote-overlay__power" data-power-toggle type="button" aria-label="Включить или выключить кондиционер" aria-pressed="true">
+        <i class="fa-solid fa-power-off"></i>
+        <span>Питание</span>
+      </button>
+
+      <nav class="remote-overlay__nav">
+        <a href="#hero" data-remote-close>Главная</a>
+        <a href="#catalog" data-remote-close>Каталог</a>
+        <a href="#about" data-remote-close>О нас</a>
+        <a href="#contacts" class="ac-header__cta" data-remote-close>Заказать</a>
+      </nav>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
